@@ -34,7 +34,7 @@ async function ServiceContent({ params }: { params: Promise<{ slug: string }> })
     <>
       <JsonLd
         data={[
-          { "@context": "https://schema.org", "@type": "Service", name: service.name, description: service.summary, provider: { "@type": "Organization", name: site.name, url: site.url }, areaServed: "GB" },
+          { "@context": "https://schema.org", "@type": "Service", name: service.name, description: service.summary, provider: { "@type": "Organization", name: site.name, url: site.url }, areaServed: ["GB", "CA"] },
           breadcrumbLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: service.name, path: `/services/${service.slug}` }], site.url),
         ]}
       />

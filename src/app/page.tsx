@@ -48,7 +48,7 @@ export default function HomePage() {
     <>
       <JsonLd
         data={[
-          { "@context": "https://schema.org", "@type": "Organization", name: site.name, url: site.url, email: site.email, description: site.description, areaServed: "GB" },
+          { "@context": "https://schema.org", "@type": "Organization", name: site.name, url: site.url, email: site.email, description: site.description, areaServed: ["GB", "CA"], address: { "@type": "PostalAddress", addressLocality: site.address.locality, addressRegion: site.address.region, addressCountry: site.address.country } },
           { "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url, inLanguage: "en-GB" },
         ]}
       />
@@ -62,7 +62,7 @@ export default function HomePage() {
           <div className="lg:col-span-8">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[0.9375rem]">
               <span className="size-2 rounded-full bg-[#5baa47] shadow-[0_0_10px_#5baa47]" aria-hidden="true" />
-              Websites and marketing for local businesses
+              Leicester agency · Working across the UK and Canada
             </p>
             <h1 id="hero-title" className="h1 mt-6 lg:mt-[min(2rem,3svh)]">
               Get found.

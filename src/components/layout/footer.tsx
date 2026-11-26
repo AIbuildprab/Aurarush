@@ -29,7 +29,8 @@ export function Footer() {
           <p className="mt-6">
             <a className="link" href={`mailto:${site.email}`}>{site.email}</a>
           </p>
-          <p className="text-muted">Based in the {site.location}</p>
+          <p className="text-muted">Based in {site.location}.</p>
+          <p className="text-muted">{site.reach}</p>
         </div>
         <div className="lg:col-span-4">
           <h2 className="label">Services</h2>

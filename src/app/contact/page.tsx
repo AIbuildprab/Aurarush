@@ -25,7 +25,7 @@ export default function ContactPage() {
           <div className="lg:col-span-4">
             <h2 id="enquiry-title" className="h3">Prefer to talk?</h2>
             <p className="mt-4"><a className="link" href={`mailto:${site.email}`}>{site.email}</a></p>
-            <p className="mt-1 text-muted">Based in the {site.location}</p>
+            <p className="mt-1 text-muted">Based in {site.location}. {site.reach}</p>
             <BookCall className="mt-6" variant="secondary" />
             <BookingEmbed />
           </div>

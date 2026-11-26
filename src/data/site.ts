@@ -1,7 +1,10 @@
 export const site = {
   name: "AuraRush",
   email: "admin@aurarush.org",
-  location: "United Kingdom",
+  location: "Leicester, East Midlands",
+  /** Where we work. Shown in the footer, contact page and about page. */
+  reach: "Working across the UK, with clients in Canada.",
+  address: { locality: "Leicester", region: "East Midlands", country: "GB" },
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aurarush.org",
   tagline: "Websites and marketing agency",
   description: "AuraRush builds websites and runs the marketing that gets local businesses found, chosen and paid. Plain English, no jargon.",
@@ -72,7 +75,7 @@ export const engagements = [
 export const howWeWorkFaqs = [
   { question: "Do I have to take ongoing support?", answer: "No. A focused build is complete in itself." },
   { question: "When do I see a price?", answer: "After a short conversation about scope, and before any work starts. We do not publish day rates." },
-  { question: "Who will I deal with?", answer: "The people doing the work. We are UK-based: admin@aurarush.org." },
+  { question: "Who will I deal with?", answer: "The people doing the work. We are based in Leicester and work with businesses across the UK and in Canada: admin@aurarush.org." },
 ] as const;
 
 export const team: readonly { name: string; role: string; bio: string }[] = [];
@@ -84,7 +87,7 @@ export const legalPages = {
     sections: [
       {
         heading: "Who we are",
-        body: "AuraRush is a UK-based websites and marketing agency. The contact address for privacy questions is admin@aurarush.org. The legal entity, company number and registered office will be added here before launch.",
+        body: "AuraRush is a websites and marketing agency based in Leicester, in the East Midlands. We work with businesses across the UK and in Canada. The contact address for privacy questions is admin@aurarush.org. The legal entity, company number and registered office will be added here before launch.",
       },
       {
         heading: "What the enquiry form collects",
