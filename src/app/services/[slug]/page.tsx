@@ -109,7 +109,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   <Link href={`/work/${study.slug}`} className="block">
                     <BrowserFrame src={study.frames.desktop} alt={study.frames.alt} url={study.liveUrl} sizes="(min-width: 1024px) 380px, 100vw" />
                     <p className="mt-4 font-semibold">{study.client}</p>
-                    <p className="text-muted">{study.headline}</p>
+                    <p className="text-muted">{study.summary}</p>
                   </Link>
                 </li>
               ))}

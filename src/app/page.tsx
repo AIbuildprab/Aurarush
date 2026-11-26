@@ -125,7 +125,7 @@ export default function HomePage() {
                 <Link href={`/work/${study.slug}`} className="lift block">
                   <BrowserFrame src={study.frames.desktop} alt={study.frames.alt} url={study.liveUrl} sizes="(min-width: 1024px) 400px, 100vw" />
                   <p className="mt-4 font-semibold">{study.client}</p>
-                  <p className="text-muted">{study.headline}{study.status === "in-progress" ? " · In progress" : ""}</p>
+                  <p className="text-muted">{study.summary}</p>
                 </Link>
               </li>
             ))}
