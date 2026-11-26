@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Contact",
-  description: "Tell AuraRush about your business and which stage of growth is costing you most. Email admin@aurarush.org.",
+  description: "Tell AuraRush about your business and what you want more of. Email admin@aurarush.org.",
   path: "/contact",
 });
 
@@ -16,8 +16,8 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        title="Tell us where growth is leaking."
-        intro="A short note is enough. We reply from admin@aurarush.org, usually within one working day, with where we would look first."
+        title="Tell us about your business."
+        intro="A short note is enough. We reply from admin@aurarush.org, usually within one working day, with what we would do first."
         crumbs={[{ label: "Contact" }]}
       />
       <section className="section" aria-labelledby="enquiry-title">

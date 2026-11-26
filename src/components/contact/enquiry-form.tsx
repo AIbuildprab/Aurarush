@@ -7,17 +7,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { BookCall } from "@/components/layout/book-call";
-import { channels } from "@/data/framework";
-import { interests, site, stageOptions, timelines } from "@/data/site";
-import { enquirySchema, enquirySteps, stageValues, type EnquiryInput } from "@/lib/enquiry";
-
-function isStage(value: string | null): value is (typeof stageValues)[number] {
-  return value !== null && (stageValues as readonly string[]).includes(value);
-}
+import { interests, site, timelines } from "@/data/site";
+import { enquirySchema, enquirySteps, type EnquiryInput } from "@/lib/enquiry";
 
 export function EnquiryForm() {
   const params = useSearchParams();
-  const presetStage = params.get("stage");
   const presetInterest = params.get("interest");
   const source = (params.get("source") ?? "").slice(0, 60);
 
@@ -40,8 +34,6 @@ export function EnquiryForm() {
       company: "",
       role: "",
       website: "",
-      weakestStage: isStage(presetStage) ? presetStage : undefined,
-      channels: [],
       interest: interests.find((item) => item === presetInterest),
       timeline: "",
       message: "",
@@ -132,31 +124,8 @@ export function EnquiryForm() {
           </Field>
         </div>
 
-        <div hidden={step !== 1} className="grid gap-6">
-          <fieldset>
-            <legend className="text-[0.9375rem] font-medium">Which stage feels weakest?</legend>
-            <div className="mt-3 grid gap-2">
-              {stageOptions.map((option) => (
-                <label key={option.value} className="flex min-h-11 items-start gap-3 rounded-md border border-line px-3 py-2.5 text-[0.9375rem] has-[:checked]:border-accent has-[:checked]:bg-surface">
-                  <input type="radio" className="mt-1 size-4" value={option.value} {...register("weakestStage")} />
-                  {option.label}
-                </label>
-              ))}
-            </div>
-            {errors.weakestStage ? <p className="field-error mt-2">{errors.weakestStage.message}</p> : null}
-          </fieldset>
-          <fieldset>
-            <legend className="text-[0.9375rem] font-medium">Channels you use or are considering (optional)</legend>
-            <div className="mt-3 grid gap-x-6 gap-y-1 sm:grid-cols-2">
-              {channels.map((channel) => (
-                <label key={channel.id} className="flex min-h-11 items-center gap-3 text-[0.9375rem]">
-                  <input type="checkbox" className="size-4" value={channel.id} {...register("channels")} />
-                  {channel.name}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <Field label="What are you interested in?" error={errors.interest?.message}>
+        <div hidden={step !== 1} className="grid gap-5">
+          <Field label="What do you need help with?" error={errors.interest?.message}>
             <select className="field" defaultValue={interests.find((item) => item === presetInterest) ?? ""} aria-invalid={!!errors.interest} {...register("interest")}>
               <option value="" disabled>Choose one</option>
               {interests.map((option) => <option key={option}>{option}</option>)}

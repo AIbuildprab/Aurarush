@@ -3,7 +3,7 @@
 /**
  * Animated mesh-gradient background in the logo colours.
  * Uses Paper Shaders (https://shaders.paper.design, Apache-2.0), a WebGL gradient generator.
- * A paper-coloured veil keeps the headline readable; under reduced motion the gradient is still.
+ * A dark veil keeps the headline readable; under reduced motion the gradient is still.
  */
 import { MeshGradient } from "@paper-design/shaders-react";
 import { useSyncExternalStore } from "react";
@@ -32,12 +32,12 @@ export function HeroMesh() {
         grainMixer={0.1}
         grainOverlay={0.06}
         speed={reduced ? 0 : 0.35}
-        className="absolute inset-0 size-full opacity-60"
+        className="absolute inset-0 size-full opacity-90"
         style={{ width: "100%", height: "100%" }}
       />
       {/* Veil: keeps the left (text) side calm and fades into the page below. */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--paper)_0%,color-mix(in_srgb,var(--paper)_82%,transparent)_34%,color-mix(in_srgb,var(--paper)_20%,transparent)_70%,transparent_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--paper)] to-transparent" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,color-mix(in_srgb,var(--paper)_78%,transparent)_0%,color-mix(in_srgb,var(--paper)_45%,transparent)_45%,transparent_85%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[var(--paper)] to-transparent" />
     </div>
   );
 }

@@ -8,7 +8,6 @@ import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
 import { Reveal } from "@/components/ui/reveal";
 import { SiteTour } from "@/components/work/site-tour";
 import { CaseVideo } from "@/components/work/case-video";
-import { getStage } from "@/data/framework";
 import { getService } from "@/data/services";
 import { site } from "@/data/site";
 import { contextNote, getPublishedWork, getTour, getWork } from "@/data/work";
@@ -86,13 +85,8 @@ async function WorkDetailContent({ params }: { params: Promise<{ slug: string }>
             </ul>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <h2 className="h3">Stages supported</h2>
-            <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-              {study.stages.map((id) => (
-                <li key={id} data-stage={id} className="flex items-center gap-2"><span className="stage-dot" aria-hidden="true" />{getStage(id)?.name}</li>
-              ))}
-            </ul>
-            <p className="mt-3 text-sm text-muted">
+            <h2 className="h3">Services used</h2>
+            <p className="mt-4">
               {services.map((service, index) => (
                 <span key={service.slug}>{index > 0 ? ", " : ""}<Link className="link" href={`/services/${service.slug}`}>{service.name}</Link></span>
               ))}

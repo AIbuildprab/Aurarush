@@ -24,7 +24,7 @@ export function Footer() {
         <div className="lg:col-span-4">
           <Logo />
           <p className="mt-6 max-w-[40ch] text-muted">
-            A digital growth agency for local businesses.
+            Websites and marketing for local businesses.
           </p>
           <p className="mt-6">
             <a className="link" href={`mailto:${site.email}`}>{site.email}</a>
@@ -44,7 +44,7 @@ export function Footer() {
         <div className="lg:col-span-2">
           <h2 className="label">Explore</h2>
           <ul className="mt-4 grid gap-1">
-            {[...navigation.primary, ...navigation.tools].map((link) => (
+            {navigation.primary.map((link) => (
               <li key={link.href}>
                 <Link className="inline-flex min-h-11 items-center hover:underline" href={link.href}>{link.label}</Link>
               </li>

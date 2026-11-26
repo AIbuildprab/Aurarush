@@ -13,6 +13,29 @@ const sites = {
   "raindrops-beauty-salon": "https://www.raindropsbeautysalonltd.com/",
 };
 
+
+/**
+ * Makes the logo's background transparent. The background colour is the average of the four corners;
+ * pixels close to it become transparent, with a soft ramp so edges stay smooth.
+ */
+function removeBackground(data, width, height) {
+  const corner = (x, y) => {
+    const i = (y * width + x) * 4;
+    return [data[i], data[i + 1], data[i + 2]];
+  };
+  const corners = [corner(0, 0), corner(width - 1, 0), corner(0, height - 1), corner(width - 1, height - 1)];
+  const bg = [0, 1, 2].map((c) => corners.reduce((sum, px) => sum + px[c], 0) / 4);
+  const LOW = 38; // fully transparent within this colour distance
+  const HIGH = 96; // fully opaque beyond this
+  const out = Buffer.from(data);
+  for (let i = 0; i < out.length; i += 4) {
+    const d = Math.hypot(out[i] - bg[0], out[i + 1] - bg[1], out[i + 2] - bg[2]);
+    const alpha = d <= LOW ? 0 : d >= HIGH ? 1 : (d - LOW) / (HIGH - LOW);
+    out[i + 3] = Math.round(out[i + 3] * alpha);
+  }
+  return out;
+}
+
 const wanted = process.argv.slice(2);
 const targets = Object.entries(sites).filter(([slug]) => wanted.length === 0 || wanted.includes(slug));
 const sizes = {};
@@ -34,7 +57,12 @@ try {
     mkdirSync(out, { recursive: true });
     const raw = join(out, "logo.png");
     await brand.screenshot({ path: raw });
-    const info = await sharp(raw).trim({ threshold: 6 }).extend({ top: 8, bottom: 8, left: 12, right: 12, background: "#00000000" }).webp({ quality: 90 }).toFile(join(out, "logo.webp"));
+    const trimmed = await sharp(raw).trim({ threshold: 6 }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    const clear = removeBackground(trimmed.data, trimmed.info.width, trimmed.info.height);
+    const info = await sharp(clear, { raw: { width: trimmed.info.width, height: trimmed.info.height, channels: 4 } })
+      .extend({ top: 8, bottom: 8, left: 12, right: 12, background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .webp({ quality: 92, alphaQuality: 100 })
+      .toFile(join(out, "logo.webp"));
     rmSync(raw, { force: true });
     sizes[slug] = [info.width, info.height];
     console.log(slug, info.width, info.height);

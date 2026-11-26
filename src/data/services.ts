@@ -1,23 +1,22 @@
-import type { ChannelId, StageId } from "@/data/framework";
-
 export type ServiceSlug =
-  | "outbound-outreach"
+  | "websites-and-funnels"
   | "content-and-seo"
   | "paid-media"
-  | "websites-and-funnels"
+  | "outbound-outreach"
   | "client-systems-and-dashboards"
   | "growth-audit-and-roadmap"
   | "managed-support";
 
 export type Service = {
   slug: ServiceSlug;
+  /** Plain-English name, used everywhere. */
   name: string;
-  stage: StageId | "cross-stage";
-  channels: ChannelId[];
-  /** One line, used in menus and lists. */
+  /** One line a customer can understand at a glance. */
   menu: string;
   /** Hero line on the service page. */
   summary: string;
+  /** Accent colour from the logo. */
+  accent: string;
   outputs: { title: string; text: string }[];
   weDo: string[];
   youDo: string[];
@@ -32,139 +31,133 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "outbound-outreach",
-    name: "Outbound outreach",
-    stage: "attention",
-    channels: ["outbound"],
-    menu: "Email and social outreach, every week.",
-    summary: "Targeted email and social outreach to the businesses you want, run every week and approved by you.",
+    slug: "websites-and-funnels",
+    name: "Websites",
+    menu: "A website that makes people get in touch.",
+    summary: "Fast, good-looking websites with one clear button, and forms that send every enquiry to the right place.",
+    accent: "#3a82c0",
     outputs: [
-      { title: "Prospect profile", text: "Who to reach and why, agreed first." },
-      { title: "Outreach system", text: "List, drafting, sending and follow-up, connected." },
-      { title: "Weekly summary", text: "What went out and what came back." },
+      { title: "A website built to get enquiries", text: "Clear pages, clear buttons, quick on a phone." },
+      { title: "Simple forms", text: "Short forms that ask only what you need." },
+      { title: "Enquiries sent to you", text: "Straight to your inbox or dashboard." },
     ],
-    weDo: ["Research prospects and write each opening line", "Run the sequences and sort the replies"],
-    youDo: ["Approve who we contact and what we say", "Take the conversations that matter"],
-    process: ["Profile", "Build", "Pilot", "Run"],
+    weDo: ["Design and build the site", "Test it on real phones and computers"],
+    youDo: ["Tell us who your customers are", "Approve what goes on the site"],
+    process: ["Listen", "Design", "Build", "Launch"],
+    workSlugs: ["ninh-studio", "green-lotus-landscape", "raindrops-beauty-salon"],
+    faqs: [
+      { question: "Is this just a brochure site?", answer: "No. It is built to get enquiries, not just to look nice." },
+      { question: "What does it cost?", answer: "We agree a price after a short call, before any work starts." },
+    ],
+    related: ["content-and-seo", "managed-support"],
+    availability: "core",
+  },
+  {
+    slug: "content-and-seo",
+    name: "Google search",
+    menu: "Show up when people search for what you do.",
+    summary: "We help your business appear on Google and keep your content fresh, so new customers find you.",
+    accent: "#5baa47",
+    outputs: [
+      { title: "Search research", text: "What your customers actually type into Google." },
+      { title: "Pages and posts", text: "Written and published for you each month." },
+      { title: "A monthly report", text: "What is working and what we will do next." },
+    ],
+    weDo: ["Research, write and publish", "Fix what holds your site back"],
+    youDo: ["Approve what we publish", "Share what you know"],
+    process: ["Audit", "Plan", "Publish", "Improve"],
     workSlugs: [],
     faqs: [
-      { question: "Is this bulk email?", answer: "No. Small, targeted batches from your own domain, with an opt-out on every message." },
-      { question: "Does it follow UK rules?", answer: "We design for UK business-to-business marketing rules. Take your own legal advice for your sector." },
+      { question: "How long does it take?", answer: "It builds over months, not weeks. We report monthly so you can see the direction." },
+      { question: "Who owns the content?", answer: "You do." },
+    ],
+    related: ["websites-and-funnels", "paid-media"],
+    availability: "on-request",
+  },
+  {
+    slug: "paid-media",
+    name: "Online ads",
+    menu: "Ads on Google and social media that bring enquiries.",
+    summary: "We set up and run your ads and show you, in one simple report, what the money produced.",
+    accent: "#f08a2a",
+    outputs: [
+      { title: "Ads that are tested", text: "Different versions, so you keep the best." },
+      { title: "One simple report", text: "Spend and results on one page." },
+      { title: "Warnings", text: "We tell you early if something stops working." },
+    ],
+    weDo: ["Build and test the ads", "Report what they earn"],
+    youDo: ["Set the budget", "Approve every ad"],
+    process: ["Review", "Set up", "Test", "Report"],
+    workSlugs: [],
+    faqs: [
+      { question: "Do you control my ad accounts?", answer: "No. The accounts and the budget stay yours." },
+      { question: "Can you promise results?", answer: "No. We make results easy to see and act on." },
+    ],
+    related: ["websites-and-funnels", "growth-audit-and-roadmap"],
+    availability: "on-request",
+  },
+  {
+    slug: "outbound-outreach",
+    name: "Outreach",
+    menu: "We contact the right businesses for you.",
+    summary: "Targeted emails and messages to the businesses you want to work with, sent every week and approved by you.",
+    accent: "#de2f4b",
+    outputs: [
+      { title: "A target list", text: "Who to contact and why, agreed first." },
+      { title: "Messages that sound like you", text: "Written for each person, approved by you." },
+      { title: "Replies sorted", text: "You only see the ones that matter." },
+    ],
+    weDo: ["Find the businesses and write the messages", "Send them and sort the replies"],
+    youDo: ["Approve who we contact", "Take the conversations that matter"],
+    process: ["Choose targets", "Write", "Send", "Follow up"],
+    workSlugs: [],
+    faqs: [
+      { question: "Is this spam?", answer: "No. Small, targeted batches from your own domain, with an opt-out on every message." },
+      { question: "Does it follow UK rules?", answer: "We design for UK business-to-business rules. Take your own legal advice for your sector." },
     ],
     related: ["growth-audit-and-roadmap", "websites-and-funnels"],
     availability: "core",
   },
   {
-    slug: "content-and-seo",
-    name: "Content and SEO",
-    stage: "attention",
-    channels: ["organic-content", "search"],
-    menu: "Content and search work that keeps going.",
-    summary: "Content and SEO that compound: research, briefs, publishing and monthly reporting.",
-    outputs: [
-      { title: "Content pipeline", text: "One source becomes posts, clips and a newsletter." },
-      { title: "Search research", text: "The questions customers ask, grouped by topic." },
-      { title: "Monthly report", text: "What is rising and what needs work." },
-    ],
-    weDo: ["Plan, write and repurpose content from your material", "Research search questions and fix on-page issues"],
-    youDo: ["Approve everything we publish", "Share what you know"],
-    process: ["Audit", "Design", "Build", "Improve"],
-    workSlugs: [],
-    faqs: [
-      { question: "How long does SEO take?", answer: "It builds over months, not weeks. We report monthly so you can see the direction." },
-      { question: "Who owns the content?", answer: "You do." },
-    ],
-    related: ["websites-and-funnels", "growth-audit-and-roadmap"],
-    availability: "on-request",
-  },
-  {
-    slug: "paid-media",
-    name: "Paid media",
-    stage: "attention",
-    channels: ["paid-advertising"],
-    menu: "Paid social and search, with one clear report.",
-    summary: "Paid campaigns built around your margins, with creative testing and one report of what your spend produced.",
-    outputs: [
-      { title: "Testing plan", text: "Structured variations and how to read them." },
-      { title: "Reporting view", text: "Spend and results from each platform on one page." },
-      { title: "Alerts", text: "A message when results move outside limits." },
-    ],
-    weDo: ["Build and test creative variations", "Report spend and results in one view"],
-    youDo: ["Set budget and goals", "Approve all creative"],
-    process: ["Review", "Connect", "Test", "Report"],
-    workSlugs: [],
-    faqs: [
-      { question: "Do you manage my ad accounts?", answer: "We build around them. Ownership and budget stay yours." },
-      { question: "Can you promise results?", answer: "No. We make results easier to see and act on." },
-    ],
-    related: ["websites-and-funnels", "growth-audit-and-roadmap"],
-    availability: "on-request",
-  },
-  {
-    slug: "websites-and-funnels",
-    name: "Websites and funnels",
-    stage: "conversion",
-    channels: ["search", "organic-content", "paid-advertising"],
-    menu: "Websites built to turn visits into enquiries.",
-    summary: "Fast websites with one clear action, and forms that qualify and route every lead.",
-    outputs: [
-      { title: "A site built around one action", text: "Page order and calls to action that lead to an enquiry." },
-      { title: "Forms and funnels", text: "Short forms that ask only what changes your reply." },
-      { title: "Routing", text: "Answers land in your inbox or dashboard." },
-    ],
-    weDo: ["Design and build the site and forms", "Test on real devices before launch"],
-    youDo: ["Tell us who should enquire", "Approve everything customers read"],
-    process: ["Listen", "Shape", "Build", "Launch"],
-    workSlugs: ["ninh-studio", "green-lotus-landscape", "raindrops-beauty-salon"],
-    faqs: [
-      { question: "Is this a brochure site?", answer: "It explains the business, but it is judged on enquiries." },
-      { question: "What does it cost?", answer: "Quoted after a short conversation, before work starts." },
-    ],
-    related: ["client-systems-and-dashboards", "managed-support"],
-    availability: "core",
-  },
-  {
     slug: "client-systems-and-dashboards",
-    name: "Client systems and dashboards",
-    stage: "monetisation",
-    channels: ["outbound", "organic-content", "search"],
-    menu: "One place to follow up and keep customers.",
-    summary: "Dashboards and client areas for trainers, salons and similar businesses, so follow-up stops relying on memory.",
+    name: "Client dashboards",
+    menu: "One place to follow up and look after customers.",
+    summary: "A simple dashboard for trainers, salons and similar businesses, so no enquiry or client is forgotten.",
+    accent: "#a23b8c",
     outputs: [
-      { title: "Enquiry and follow-up view", text: "Who needs a reply, and when." },
+      { title: "Enquiry list", text: "Who needs a reply, and when." },
       { title: "Client area", text: "Optional logins for plans, check-ins or progress." },
-      { title: "Weekly view", text: "What came in and what is waiting." },
+      { title: "Weekly summary", text: "What came in and what is waiting." },
     ],
-    weDo: ["Build the dashboard and client area", "Set up reminders and weekly summaries"],
-    youDo: ["Tell us how the day really runs", "Decide what is kept about each client"],
-    process: ["Shadow the day", "Keep it small", "Connect", "Hand over"],
+    weDo: ["Build the dashboard", "Set up reminders and summaries"],
+    youDo: ["Tell us how your day works", "Decide what you keep about each client"],
+    process: ["Shadow the day", "Keep it simple", "Connect", "Hand over"],
     workSlugs: ["stpt-coaching", "mindfull-food-fitness"],
     faqs: [
-      { question: "Is this a full gym or salon platform?", answer: "No. Only the enquiry, follow-up and client layer." },
-      { question: "Where is data kept?", answer: "UK or EU providers where possible, named in the proposal." },
+      { question: "Is this a full booking or gym system?", answer: "No. Just the enquiries, follow-ups and client area." },
+      { question: "Where is the data kept?", answer: "UK or EU providers where possible, named in the proposal." },
     ],
     related: ["websites-and-funnels", "managed-support"],
     availability: "core",
   },
   {
     slug: "growth-audit-and-roadmap",
-    name: "Growth audit and roadmap",
-    stage: "cross-stage",
-    channels: ["product-led", "borrowed-audiences", "offline", "outbound"],
-    menu: "Find the weakest stage and the next step.",
-    summary: "A short audit of attention, conversion and monetisation, ending in a Now, Next, Later roadmap.",
+    name: "Marketing review",
+    menu: "We check what is working and tell you what to do first.",
+    summary: "A short review of how people find you and contact you, ending in a clear plan: now, next and later.",
+    accent: "#f5c518",
     outputs: [
-      { title: "Funnel review", text: "Where you are strong and where you leak." },
-      { title: "Channel recommendation", text: "Which of the seven suit you." },
-      { title: "Roadmap", text: "Now, Next, Later, in plain English." },
+      { title: "What is working", text: "And what is leaking enquiries." },
+      { title: "The best next steps", text: "The few things worth doing first." },
+      { title: "A written plan", text: "Now, next and later, in plain English." },
     ],
-    weDo: ["Review your data and public presence", "Write the roadmap"],
-    youDo: ["Share access and goals", "Decide what to build"],
+    weDo: ["Review your website, search and ads", "Write the plan"],
+    youDo: ["Share access and goals", "Decide what to do"],
     process: ["Brief", "Look", "Recommend", "Decide"],
     workSlugs: [],
     faqs: [
-      { question: "Will you try to sell me a build?", answer: "No. The audit stands alone." },
-      { question: "How long does it take?", answer: "A few conversations and a written note." },
+      { question: "Will you try to sell me something?", answer: "No. The review stands alone. You can act on it with anyone." },
+      { question: "How long does it take?", answer: "A few conversations and a written plan." },
     ],
     related: ["outbound-outreach", "websites-and-funnels"],
     availability: "core",
@@ -172,19 +165,18 @@ export const services: Service[] = [
   },
   {
     slug: "managed-support",
-    name: "Managed support",
-    stage: "cross-stage",
-    channels: [],
-    menu: "Hosting, updates and a person to contact.",
-    summary: "Hosting, monitoring and small improvements, so what we build keeps working.",
+    name: "Ongoing support",
+    menu: "Hosting, updates and a person to call.",
+    summary: "We keep your website running, safe and improving, with a named person who answers.",
+    accent: "#7fc8a9",
     outputs: [
-      { title: "Hosting and care", text: "Backups, updates and security basics." },
-      { title: "Named contact", text: "A stated response time." },
-      { title: "Monthly improvements", text: "Small changes on an agreed rhythm." },
+      { title: "Hosting and care", text: "Backups, updates and security." },
+      { title: "A named contact", text: "A stated reply time." },
+      { title: "Monthly improvements", text: "Small changes, no new project each time." },
     ],
-    weDo: ["Monitor, update and fix", "Make agreed improvements"],
+    weDo: ["Keep it running and safe", "Make agreed improvements"],
     youDo: ["Tell us what changes", "Approve changes before they go live"],
-    process: ["Take stock", "Stabilise", "Watch", "Improve"],
+    process: ["Take stock", "Secure", "Watch", "Improve"],
     workSlugs: [],
     faqs: [
       { question: "Can I leave?", answer: "Yes. We hand over access and notes." },

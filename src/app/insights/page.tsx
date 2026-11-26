@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Insights",
-  description: "Plain-English writing on winning attention, converting it and turning it into revenue.",
+  description: "Plain-English tips for getting more customers.",
   path: "/insights",
 });
 
@@ -15,25 +15,22 @@ export default function InsightsPage() {
     <>
       <PageHero
         title="Insights"
-        intro="Short, practical writing on the three jobs of a growth system. Each piece is tagged by the stage it helps with."
+        intro="Short, practical tips for getting more customers."
         crumbs={[{ label: "Insights" }]}
       />
       <section className="section" aria-label="Articles">
         <div className="container-wide">
           <ul className="border-t border-line-strong">
             {insights.map((article) => (
-              <li key={article.slug} data-stage={article.stage} className="border-b border-line">
+              <li key={article.slug} className="border-b border-line">
                 <Link href={`/insights/${article.slug}`} className="row-link group grid gap-3 py-6 md:grid-cols-[200px_1fr_auto] md:items-center md:gap-8">
-                  <span className="flex items-center gap-2 text-sm text-muted">
-                    <span className="stage-dot" aria-hidden="true" />
-                    <span className="capitalize">{article.stage}</span>
-                  </span>
+                  <span className="text-sm text-muted">{article.date}</span>
                   <span>
                     <span className="block font-display text-2xl group-hover:underline">{article.title}</span>
                     <span className="mt-1 block max-w-[62ch] text-muted">{article.excerpt}</span>
                   </span>
                   <span className="flex items-center gap-3 text-sm text-muted">
-                    {article.date} · {article.readTime}
+                    {article.readTime}
                     <ArrowUpRight className="card-arrow size-4" aria-hidden="true" />
                   </span>
                 </Link>

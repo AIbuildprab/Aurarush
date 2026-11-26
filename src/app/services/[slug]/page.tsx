@@ -6,7 +6,6 @@ import { PageHero } from "@/components/layout/page-hero";
 import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
 import { FaqList } from "@/components/ui/faq-list";
 import { BrowserFrame } from "@/components/work/browser-frame";
-import { getChannel, getStage } from "@/data/framework";
 import { getService, services } from "@/data/services";
 import { site } from "@/data/site";
 import { getWork } from "@/data/work";
@@ -28,7 +27,6 @@ async function ServiceContent({ params }: { params: Promise<{ slug: string }> })
   const service = getService(slug);
   if (!service) notFound();
 
-  const stage = service.stage === "cross-stage" ? null : getStage(service.stage);
   const work = service.workSlugs.map((item) => getWork(item)).filter((item) => item !== undefined);
   const related = service.related.map((item) => getService(item)).filter((item) => item !== undefined);
 
@@ -40,29 +38,21 @@ async function ServiceContent({ params }: { params: Promise<{ slug: string }> })
           breadcrumbLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: service.name, path: `/services/${service.slug}` }], site.url),
         ]}
       />
-      <PageHero title={service.name} intro={service.summary} crumbs={[{ href: "/services", label: "Services" }, { label: service.name }]}>
-        <p data-stage={service.stage} className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-1 text-[0.9375rem]">
-          <span className="flex items-center gap-2 font-semibold">
-            <span className="stage-dot" aria-hidden="true" />
-            {stage ? stage.name : "Across every stage"}
-          </span>
-          {service.channels.length > 0 ? (
-            <span className="text-muted">
-              {service.channels.map((id, index) => (
-                <span key={id}>{index > 0 ? ", " : ""}<Link className="link" href={`/framework#${id}`}>{getChannel(id)?.name}</Link></span>
-              ))}
-            </span>
-          ) : null}
-        </p>
-      </PageHero>
+      <div className="relative overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none absolute -top-40 -right-40 size-[620px] rounded-full opacity-40 blur-[120px]" style={{ background: service.accent }} />
+        <PageHero title={service.name} intro={service.summary} crumbs={[{ href: "/services", label: "Services" }, { label: service.name }]} />
+      </div>
 
       <section className="section" aria-labelledby="outputs-title">
         <div className="container-wide grid gap-10 lg:grid-cols-12">
           <h2 id="outputs-title" className="h2 lg:col-span-4">What you get</h2>
           <ul className="border-t border-line-strong lg:col-span-8">
             {service.outputs.map((output) => (
-              <li key={output.title} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[220px_1fr] sm:gap-6">
-                <span className="font-medium">{output.title}</span>
+              <li key={output.title} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[240px_1fr] sm:gap-6">
+                <span className="flex items-center gap-3 font-medium">
+                  <span className="size-2.5 rounded-full" style={{ background: service.accent, boxShadow: `0 0 12px ${service.accent}` }} aria-hidden="true" />
+                  {output.title}
+                </span>
                 <span className="text-muted">{output.text}</span>
               </li>
             ))}
@@ -88,10 +78,10 @@ async function ServiceContent({ params }: { params: Promise<{ slug: string }> })
 
       <section className="section" aria-labelledby="process-title">
         <div className="container-wide grid gap-10 lg:grid-cols-12">
-          <h2 id="process-title" className="h2 lg:col-span-4">How it runs</h2>
+          <h2 id="process-title" className="h2 lg:col-span-4">How it works</h2>
           <ol className="grid gap-4 sm:grid-cols-4 lg:col-span-8">
             {service.process.map((step, index) => (
-              <li key={step} className="border-t border-line-strong pt-3">
+              <li key={step} className="border-t pt-3" style={{ borderColor: service.accent }}>
                 <span className="font-display text-2xl text-muted" aria-hidden="true">{index + 1}</span>
                 <p className="mt-1 font-semibold">{step}</p>
               </li>
@@ -103,11 +93,11 @@ async function ServiceContent({ params }: { params: Promise<{ slug: string }> })
       {work.length > 0 ? (
         <section className="section border-y border-line bg-surface" aria-labelledby="work-title">
           <div className="container-wide">
-            <h2 id="work-title" className="h2">Related work</h2>
+            <h2 id="work-title" className="h2">Examples</h2>
             <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {work.map((study) => (
                 <li key={study.slug}>
-                  <Link href={`/work/${study.slug}`} className="block">
+                  <Link href={`/work/${study.slug}`} className="lift block">
                     <BrowserFrame src={study.frames.desktop} alt={study.frames.alt} url={study.liveUrl} sizes="(min-width: 1024px) 380px, 100vw" />
                     <p className="mt-4 font-semibold">{study.client}</p>
                     <p className="text-muted">{study.summary}</p>

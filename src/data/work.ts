@@ -1,4 +1,3 @@
-import type { StageId } from "@/data/framework";
 import type { ServiceSlug } from "@/data/services";
 import tourSizes from "@/data/tour-sizes.json";
 
@@ -11,7 +10,6 @@ export type CaseStudy = {
   status: "live" | "in-progress";
   /** Only "confirmed" studies are published. */
   permission: "confirmed" | "pending";
-  stages: StageId[];
   serviceSlugs: ServiceSlug[];
   headline: string;
   summary: string;
@@ -37,7 +35,6 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://www.stptcoaching.com/",
     status: "live",
     permission: "confirmed",
-    stages: ["conversion", "monetisation"],
     serviceSlugs: ["websites-and-funnels", "client-systems-and-dashboards"],
     headline: "A coaching site with a client dashboard",
     summary: "Personal trainer site with a fully customised client dashboard.",
@@ -57,7 +54,6 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://www.mindfullfoodfitness.com/",
     status: "in-progress",
     permission: "confirmed",
-    stages: ["conversion", "monetisation"],
     serviceSlugs: ["websites-and-funnels", "client-systems-and-dashboards"],
     headline: "A 12-month programme, explained",
     summary: "Personal trainer site with a client dashboard, currently in progress.",
@@ -75,7 +71,6 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://www.ninhstudio.ca/",
     status: "live",
     permission: "confirmed",
-    stages: ["attention", "conversion"],
     serviceSlugs: ["websites-and-funnels"],
     headline: "One studio, sold two ways",
     summary: "Photography studio based in Canada.",
@@ -94,7 +89,6 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://www.greenlotuslandscapes.ca/",
     status: "live",
     permission: "confirmed",
-    stages: ["attention", "conversion"],
     serviceSlugs: ["websites-and-funnels"],
     headline: "Finished work first, a quote one tap away",
     summary: "Landscaping business doing garden work and more.",
@@ -113,7 +107,6 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://www.raindropsbeautysalonltd.com/",
     status: "live",
     permission: "confirmed",
-    stages: ["attention", "conversion"],
     serviceSlugs: ["websites-and-funnels"],
     headline: "A full menu that leads to a message",
     summary: "Home salon based in Canada.",

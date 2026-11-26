@@ -3,7 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
 import { BrowserFrame } from "@/components/work/browser-frame";
-import { getStage } from "@/data/framework";
 import { getPublishedWork } from "@/data/work";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -36,15 +35,7 @@ export default function WorkPage() {
                 <h2 className="h3 mt-3">{study.client}</h2>
                 <p className="mt-2 font-display text-xl">{study.headline}</p>
                 <p className="mt-3 text-muted">{study.summary}</p>
-                <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-                  {study.stages.map((id) => (
-                    <li key={id} data-stage={id} className="flex items-center gap-2">
-                      <span className="stage-dot" aria-hidden="true" />
-                      {getStage(id)?.name}
-                    </li>
-                  ))}
-                  {study.status === "in-progress" ? <li className="font-semibold">In progress</li> : null}
-                </ul>
+                {study.status === "in-progress" ? <p className="mt-3 text-sm font-semibold">In progress</p> : null}
                 <Link className="btn btn-text mt-4" href={`/work/${study.slug}`}>
                   Read the case study <ArrowUpRight className="card-arrow size-4" aria-hidden="true" />
                 </Link>

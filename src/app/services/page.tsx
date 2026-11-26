@@ -5,14 +5,14 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Services",
-  description: "Seven agency services organised by the growth stage they improve, plus an audit and managed support.",
+  description: "Websites, Google search, online ads, outreach, client dashboards, a marketing review and ongoing support.",
   path: "/services",
 });
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHero title="Services" intro="Organised by the stage they improve. Unsure? Start with the growth audit." crumbs={[{ label: "Services" }]} />
+      <PageHero title="Services" intro="Pick one, or combine them. Unsure? Start with the marketing review." crumbs={[{ label: "Services" }]} />
       <section className="section wash-stages" aria-label="All services">
         <div className="container-wide">
           <ServiceBento />

@@ -40,7 +40,7 @@ export default function TrustPage() {
           <h2 id="limits-title" className="h2 lg:col-span-4">We will not</h2>
           <ul className="grid gap-3 lg:col-span-7">
             {limits.map((line) => (
-              <li key={line} className="flex gap-3"><span className="stage-dot mt-2.5" aria-hidden="true" />{line}</li>
+              <li key={line} className="flex gap-3"><span className="mt-2.5 size-2 shrink-0 rounded-full bg-[#f5c518]" aria-hidden="true" />{line}</li>
             ))}
           </ul>
         </div>

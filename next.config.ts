@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
         destination: `/services/${to}`,
         permanent: true,
       })),
+      { source: "/framework", destination: "/", permanent: true },
+      { source: "/funnel-check", destination: "/services", permanent: true },
       { source: "/work/funnel-website", destination: "/work", permanent: true },
       { source: "/work/pt-dashboard", destination: "/work/stpt-coaching", permanent: true },
       { source: "/work/salon-dashboard", destination: "/work/raindrops-beauty-salon", permanent: true },

@@ -1,17 +1,6 @@
 import { z } from "zod";
 import { interests, timelines } from "@/data/site";
 
-export const stageValues = ["attention", "conversion", "monetisation", "not-sure"] as const;
-export const channelValues = [
-  "organic-content",
-  "search",
-  "product-led",
-  "paid-advertising",
-  "borrowed-audiences",
-  "outbound",
-  "offline",
-] as const;
-
 const optionalText = z.string().trim().max(200).optional().or(z.literal(""));
 
 export const enquirySchema = z.object({
@@ -27,8 +16,6 @@ export const enquirySchema = z.object({
       (value) => value === "" || /^(https?:\/\/)?[^\s]+\.[^\s]+$/.test(value),
       "Enter a valid website, or leave this blank.",
     ),
-  weakestStage: z.enum(stageValues, { errorMap: () => ({ message: "Choose the stage that feels weakest." }) }),
-  channels: z.array(z.enum(channelValues)).max(7),
   interest: z.enum(interests, { errorMap: () => ({ message: "Choose what you are interested in." }) }),
   timeline: z.enum(timelines).optional().or(z.literal("")),
   message: z.string().trim().min(12, "Tell us a little more, in a sentence or two.").max(3000),
@@ -46,6 +33,6 @@ export type EnquiryInput = z.infer<typeof enquirySchema>;
 
 export const enquirySteps = [
   { title: "About you", fields: ["fullName", "email", "company", "role", "website"] },
-  { title: "What you need", fields: ["weakestStage", "channels", "interest", "timeline"] },
+  { title: "What you need", fields: ["interest", "timeline"] },
   { title: "Your message", fields: ["message", "consent"] },
 ] as const satisfies readonly { title: string; fields: readonly (keyof EnquiryInput)[] }[];

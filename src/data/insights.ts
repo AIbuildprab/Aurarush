@@ -1,5 +1,3 @@
-import type { StageId } from "@/data/framework";
-
 export type InsightBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
@@ -9,7 +7,6 @@ export type InsightBlock =
 export type Insight = {
   slug: string;
   title: string;
-  stage: StageId;
   date: string;
   dateIso: string;
   readTime: string;
@@ -19,26 +16,24 @@ export type Insight = {
 
 export const insights: Insight[] = [
   {
-    slug: "start-with-the-weakest-stage",
-    title: "Start with the weakest stage of your funnel",
-    stage: "attention",
+    slug: "one-clear-button",
+    title: "Why your website needs one clear button",
     date: "12 November 2026",
     dateIso: "2026-11-12",
     readTime: "2 min read",
-    excerpt: "Fix the stage costing you most before you add anything else.",
+    excerpt: "People leave when they do not know what to do next.",
     blocks: [
-      { type: "p", text: "Most businesses fix growth by doing more of what is most visible: more posts, more ads, a new website. It often fixes the wrong thing." },
-      { type: "h2", text: "Three jobs, one order" },
-      { type: "p", text: "A business needs people to find it (attention), to act once they arrive (conversion), and to pay and come back (monetisation). More attention into a weak conversion path only produces more lost enquiries." },
-      { type: "quote", text: "More traffic into a leaking funnel is a more expensive leak." },
-      { type: "h2", text: "Find the weak stage" },
-      { type: "p", text: "Ask three questions. Do the right people know you exist? Do they take a clear next step? Do you follow up until the answer is yes or no? The first no is where to start." },
+      { type: "p", text: "Most websites ask visitors to do five things at once. Call us, email us, follow us, read our blog, fill in a form. So they do none of them." },
+      { type: "h2", text: "Pick the one thing you want" },
+      { type: "p", text: "Decide what a good visit looks like. Usually it is a phone call or an enquiry. Make that the biggest, clearest button on every page." },
+      { type: "quote", text: "If a visitor has to think about what to do next, you have already lost some of them." },
+      { type: "h2", text: "Check it on your phone" },
+      { type: "p", text: "Most people will see your site on a phone. Hold yours at arm's length. If you cannot see the button in two seconds, change it." },
     ],
   },
   {
     slug: "what-makes-an-enquiry-form-convert",
     title: "What makes an enquiry form convert",
-    stage: "conversion",
     date: "9 October 2026",
     dateIso: "2026-10-09",
     readTime: "2 min read",

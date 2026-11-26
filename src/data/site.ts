@@ -3,8 +3,8 @@ export const site = {
   email: "admin@aurarush.org",
   location: "United Kingdom",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aurarush.org",
-  tagline: "Digital growth agency",
-  description: "AuraRush is a digital growth agency: websites, search, outreach and client systems that win attention, convert it and turn it into revenue.",
+  tagline: "Websites and marketing agency",
+  description: "AuraRush builds websites and runs the marketing that gets local businesses found, chosen and paid. Plain English, no jargon.",
   legal: {
     entity: "",
     companyNumber: "",
@@ -19,7 +19,7 @@ export const BOOKING_URL = "";
 
 export const navigation = {
   primary: [
-    { href: "/framework", label: "Framework" },
+    { href: "/services", label: "Services" },
     { href: "/work", label: "Work" },
     { href: "/insights", label: "Insights" },
   ],
@@ -29,20 +29,12 @@ export const navigation = {
     { href: "/trust", label: "Our promises" },
     { href: "/contact", label: "Contact" },
   ],
-  tools: [{ href: "/funnel-check", label: "Funnel check" }],
   legal: [
     { href: "/privacy", label: "Privacy Policy" },
     { href: "/cookies", label: "Cookie Policy" },
     { href: "/terms", label: "Terms" },
   ],
 } as const;
-
-export const stageOptions = [
-  { value: "attention", label: "Attention: too few of the right people find us" },
-  { value: "conversion", label: "Conversion: people visit but do not enquire" },
-  { value: "monetisation", label: "Monetisation: enquiries do not become revenue" },
-  { value: "not-sure", label: "I am not sure" },
-] as const;
 
 export const interests = [
   "Outbound outreach",
@@ -65,14 +57,14 @@ export const commitments = [
 ] as const;
 
 export const howWeWork = [
-  { title: "Discover", text: "A call to find where growth is leaking." },
-  { title: "Plan", text: "A written scope: what we build, who does what, the cost." },
-  { title: "Build", text: "Built in small pieces, each one shown to you." },
-  { title: "Run", text: "Looked after and improved every month." },
+  { title: "Talk", text: "A call about your business and what you want." },
+  { title: "Plan", text: "A written plan with the price, before we start." },
+  { title: "Build", text: "We build it and show you each step." },
+  { title: "Grow", text: "We look after it and improve it every month." },
 ] as const;
 
 export const engagements = [
-  { name: "Growth audit", text: "A review and a written roadmap." },
+  { name: "Marketing review", text: "A check of what works, and a written plan." },
   { name: "Focused build", text: "One system, with a clear scope and finish." },
   { name: "Build and managed support", text: "A build, then hosting and improvements." },
 ] as const;
@@ -92,11 +84,11 @@ export const legalPages = {
     sections: [
       {
         heading: "Who we are",
-        body: "AuraRush is a UK-based digital growth agency. The contact address for privacy questions is admin@aurarush.org. The legal entity, company number and registered office will be added here before launch.",
+        body: "AuraRush is a UK-based websites and marketing agency. The contact address for privacy questions is admin@aurarush.org. The legal entity, company number and registered office will be added here before launch.",
       },
       {
         heading: "What the enquiry form collects",
-        body: "If you write to us, we collect your name, email, company, the stage of growth you want help with, the kind of help you are interested in, your message, and any role, website or timeline you choose to add. We also store a record of your cookie choice on your device.",
+        body: "If you write to us, we collect your name, email, company, the kind of help you are interested in, your message, and any role, website or timeline you choose to add. We also store a record of your cookie choice on your device.",
       },
       {
         heading: "Why we use it",

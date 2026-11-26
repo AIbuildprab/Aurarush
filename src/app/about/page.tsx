@@ -13,8 +13,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="A growth agency, with someone accountable."
-        intro="Every business needs attention, a way to convert it, and a way to turn it into revenue. We build and run all three."
+        title="A small agency with a named person on every job."
+        intro="We build websites and run marketing for local businesses, and we explain everything in plain English."
         crumbs={[{ label: "About" }]}
       />
 

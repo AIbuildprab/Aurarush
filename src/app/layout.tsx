@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, Newsreader } from "next/font/google";
+import { Bricolage_Grotesque, Hanken_Grotesk, Instrument_Serif } from "next/font/google";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
@@ -8,11 +8,19 @@ import { SkipLink } from "@/components/layout/skip-link";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
   axes: ["opsz"],
-  variable: "--font-newsreader",
+  variable: "--font-bricolage",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
 });
 
 const hanken = Hanken_Grotesk({
@@ -43,15 +51,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbfafc",
-  colorScheme: "light",
+  themeColor: "#0b0910",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-GB" className={`${newsreader.variable} ${hanken.variable}`}>
+    <html lang="en-GB" className={`${bricolage.variable} ${instrumentSerif.variable} ${hanken.variable}`}>
       <body className="min-h-screen antialiased">
         <SkipLink />
         <Header />

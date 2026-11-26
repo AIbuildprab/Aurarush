@@ -5,7 +5,7 @@ import { site } from "@/data/site";
 import { getPublishedWork } from "@/data/work";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const fixed = ["/", "/framework", "/services", "/work", "/insights", "/how-we-work", "/about", "/trust", "/funnel-check", "/contact", "/privacy", "/cookies", "/terms"];
+  const fixed = ["/", "/services", "/work", "/insights", "/how-we-work", "/about", "/trust", "/contact", "/privacy", "/cookies", "/terms"];
 
   return [
     ...fixed.map((path) => ({

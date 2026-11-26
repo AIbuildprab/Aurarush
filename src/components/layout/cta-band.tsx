@@ -7,8 +7,8 @@ import { WordReveal } from "@/components/ui/word-reveal";
 import { site } from "@/data/site";
 
 export function CtaBand({
-  title = "Where is your growth leaking?",
-  text = "Tell us about the business. We reply with where we would look first.",
+  title = "Ready for more customers?",
+  text = "Tell us about your business. We reply with what we would do first.",
   secondary,
 }: {
   title?: string;
@@ -27,9 +27,9 @@ export function CtaBand({
           <p className="lead mt-5">{text}</p>
         </div>
         <div className="relative overflow-hidden rounded-xl border border-line bg-surface/50 p-6 lg:col-span-5 lg:justify-self-end">
-          <BorderBeam colorFrom="var(--attention-fill)" colorTo="var(--monetisation-fill)" duration={9} />
+          <BorderBeam colorFrom="#f5c518" colorTo="#de2f4b" duration={9} />
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <BookCall className="!bg-ink !text-paper hover:!bg-accent hover:!text-paper" />
+            <BookCall />
             {secondary ? (
               <Link href={secondary.href} className="btn btn-secondary">{secondary.label}</Link>
             ) : null}

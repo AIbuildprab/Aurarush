@@ -28,7 +28,7 @@ export function PageHero({
         </nav>
         <div className="mt-8 grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <WordReveal as="h1" id="page-title" text={title} className="h1" />
+            <WordReveal as="h1" id="page-title" text={title} className="h1 !text-[clamp(2.5rem,6.5vw,5.75rem)]" />
             {intro ? <p className="lead mt-6">{intro}</p> : null}
           </div>
         </div>
