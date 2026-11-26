@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { channels, directionCopy, getChannel, getStage, stages, type Channel, type StageId } from "@/data/framework";
+import { BorderBeam } from "@/components/magic/border-beam";
 import { getService } from "@/data/services";
 import { cn } from "@/lib/utils";
 
@@ -204,8 +205,9 @@ export function FunnelEngine() {
       <figcaption className="sr-only">
         Three stages. Attention has seven channels, five inbound and two outbound. Conversion captures, qualifies and responds. Monetisation closes, retains and measures.
       </figcaption>
-      <div aria-live="polite" className="mt-8 rounded-[10px] border border-line bg-surface p-6 lg:p-8">
+      <div aria-live="polite" className="relative mt-8 overflow-hidden rounded-[10px] border border-line bg-surface p-6 shadow-[0_18px_40px_-26px_rgba(23,20,31,0.35)] lg:p-8">
         <Detail selection={selection} />
+        <BorderBeam />
       </div>
     </figure>
   );

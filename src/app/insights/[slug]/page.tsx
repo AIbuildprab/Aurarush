@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return pageMetadata({ title: article.title, description: article.excerpt, path: `/insights/${article.slug}` });
 }
 
-export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
+async function InsightContent({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = getInsight(slug);
   if (!article) notFound();
@@ -70,5 +71,13 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
       </article>
       <CtaBand />
     </>
+  );
+}
+
+export default function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
+  return (
+    <Suspense fallback={null}>
+      <InsightContent params={params} />
+    </Suspense>
   );
 }

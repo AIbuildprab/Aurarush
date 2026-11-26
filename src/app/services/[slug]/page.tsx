@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return pageMetadata({ title: service.name, description: service.summary, path: `/services/${service.slug}` });
 }
 
-export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+async function ServiceContent({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) notFound();
@@ -138,5 +139,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       <CtaBand />
     </>
+  );
+}
+
+export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  return (
+    <Suspense fallback={null}>
+      <ServiceContent params={params} />
+    </Suspense>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookCall } from "@/components/layout/book-call";
+import { BorderBeam } from "@/components/magic/border-beam";
 import { Aurora } from "@/components/ui/aurora";
 import { LogoMark } from "@/components/ui/logo";
 import { WordReveal } from "@/components/ui/word-reveal";
@@ -25,7 +26,8 @@ export function CtaBand({
           <WordReveal id="cta-title" text={title} className="h2" />
           <p className="lead mt-5">{text}</p>
         </div>
-        <div className="lg:col-span-5 lg:justify-self-end">
+        <div className="relative overflow-hidden rounded-xl border border-line bg-surface/50 p-6 lg:col-span-5 lg:justify-self-end">
+          <BorderBeam colorFrom="var(--attention-fill)" colorTo="var(--monetisation-fill)" duration={9} />
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <BookCall className="!bg-ink !text-paper hover:!bg-accent hover:!text-paper" />
             {secondary ? (

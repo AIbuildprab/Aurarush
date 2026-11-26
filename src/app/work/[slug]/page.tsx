@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { CtaBand } from "@/components/layout/cta-band";
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return pageMetadata({ title: `${study.client}: ${study.headline}`, description: study.summary, path: `/work/${study.slug}` });
 }
 
-export default async function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+async function WorkDetailContent({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const study = getWork(slug);
   if (!study) notFound();
@@ -133,5 +134,13 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
 
       <CtaBand />
     </>
+  );
+}
+
+export default function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  return (
+    <Suspense fallback={null}>
+      <WorkDetailContent params={params} />
+    </Suspense>
   );
 }
