@@ -279,6 +279,40 @@ a:hover > .card-arrow, a:hover .card-arrow { transform: translate(2px, -2px); }
   50% { transform: rotate(3deg) translateY(-14px); }
 }
 
+/* Colour burst behind the phone when the site changes (screensaver-style ribbon) */
+.burst-ring, .burst-flash, .burst-ring-2 { position: absolute; left: 0; top: 0; border-radius: 50%; opacity: 0; pointer-events: none; mix-blend-mode: plus-lighter; }
+.burst-ring, .burst-ring-2 {
+  width: 360px; height: 360px; margin: -180px 0 0 -180px;
+  background: conic-gradient(from var(--rot, 0deg), #3a82c0, #6b4e9e, #a23b8c, #de2f4b, #f08a2a, #f5c518, #5baa47, #7fc8a9, #3a82c0);
+  filter: blur(10px) saturate(1.6);
+  -webkit-mask: radial-gradient(closest-side, transparent 66%, #000 72%, #000 80%, transparent 88%);
+  mask: radial-gradient(closest-side, transparent 66%, #000 72%, #000 80%, transparent 88%);
+  animation: burst-ring var(--cycle, 20s) cubic-bezier(0.12, 0.9, 0.3, 1) infinite;
+}
+.burst-ring-2 { filter: blur(22px) saturate(1.8); animation-name: burst-ring-2; }
+.burst-flash {
+  width: 460px; height: 460px; margin: -230px 0 0 -230px;
+  background: radial-gradient(closest-side, #fff, rgba(245, 197, 24, 0.75) 30%, rgba(222, 47, 75, 0.45) 60%, transparent);
+  animation: burst-flash var(--cycle, 20s) ease-out infinite;
+}
+@keyframes burst-ring {
+  0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  1% { opacity: 1; }
+  12% { opacity: 0.9; }
+  20%, 100% { opacity: 0; transform: scale(7.5) rotate(70deg); }
+}
+@keyframes burst-ring-2 {
+  0%, 1.2% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  2.5% { opacity: 0.9; }
+  16% { opacity: 0.7; }
+  26%, 100% { opacity: 0; transform: scale(9) rotate(-60deg); }
+}
+@keyframes burst-flash {
+  0% { opacity: 0; transform: scale(0.5); }
+  0.8% { opacity: 1; }
+  7%, 100% { opacity: 0; transform: scale(3.4); }
+}
+
 /* Giant scrolling words */
 .words-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
 .words-track:hover { animation-play-state: paused; }
@@ -372,7 +406,8 @@ a:hover > .card-arrow, a:hover .card-arrow { transform: translate(2px, -2px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-left, .aurora-right, .word-inner, .flower-spin, .reveal, .shine-border, .phone-float, .words-track { animation: none !important; }
+  .aurora-left, .aurora-right, .word-inner, .flower-spin, .reveal, .shine-border, .phone-float, .words-track, .burst-ring, .burst-flash { animation: none !important; }
+  .burst-ring, .burst-ring-2, .burst-flash { display: none; }
   .phone-slide { animation: none; }
   .phone-slide:not(:first-child) { display: none; }
   .marquee { mask-image: none; }
