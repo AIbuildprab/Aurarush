@@ -1,238 +1,202 @@
-export const serviceHues = {
-  magenta: { color: "#A23B8C", text: "#D277BD" },
-  crimson: { color: "#DE2F4B", text: "#F2677D" },
-  orange: { color: "#F08A2A", text: "#F08A2A" },
-  amber: { color: "#F5C518", text: "#F5C518" },
-  blue: { color: "#3A82C0", text: "#3A82C0" },
-  green: { color: "#5BAA47", text: "#5BAA47" },
-} as const;
-
-export type ServiceHue = keyof typeof serviceHues;
+export type ServiceSlug =
+  | "websites-and-funnels"
+  | "content-and-seo"
+  | "paid-media"
+  | "outbound-outreach"
+  | "client-systems-and-dashboards"
+  | "growth-audit-and-roadmap"
+  | "managed-support";
 
 export type Service = {
-  number: string;
-  slug: string;
+  slug: ServiceSlug;
+  /** Plain-English name, used everywhere. */
   name: string;
-  hue: ServiceHue;
+  /** One line a customer can understand at a glance. */
   menu: string;
+  /** Hero line on the service page. */
   summary: string;
-  outcome: string;
-  tags: string[];
-  intro: string;
-  included: string[];
-  process: { title: string; text: string }[];
+  /** Accent colour from the logo. */
+  accent: string;
+  outputs: { title: string; text: string }[];
+  weDo: string[];
+  youDo: string[];
+  process: string[];
+  workSlugs: string[];
   faqs: { question: string; answer: string }[];
-  price: number | null;
-  mock: "funnel" | "pt" | "salon" | "consulting";
+  related: ServiceSlug[];
+  /** core: built regularly. on-request: scoped per project. */
+  availability: "core" | "on-request";
+  startHere?: boolean;
 };
 
 export const services: Service[] = [
   {
-    number: "01",
-    slug: "funnel-websites",
-    name: "Funnel Websites",
-    hue: "magenta",
-    menu: "Fast websites built to turn visitors into enquiries.",
-    summary: "Fast, professional websites designed around one job: turning visitors into enquiries.",
-    outcome: "More qualified enquiries",
-    tags: ["Design", "Build", "Page structure", "Speed"],
-    intro: "A funnel website is built around the enquiry, not around a pile of pages. Visitors see what you do, who it is for, and the next step.",
-    included: [
-      "A clear page structure aimed at one action",
-      "Mobile-first layout and fast loading",
-      "Space for proof, without invented testimonials",
-      "A path into the enquiry form",
-      "Basic on-page search setup",
-      "Handover in plain English",
+    slug: "websites-and-funnels",
+    name: "Websites",
+    menu: "A website that makes people get in touch.",
+    summary: "Fast, good-looking websites with one clear button, and forms that send every enquiry to the right place.",
+    accent: "#3a82c0",
+    outputs: [
+      { title: "A website built to get enquiries", text: "Clear pages, clear buttons, quick on a phone." },
+      { title: "Simple forms", text: "Short forms that ask only what you need." },
+      { title: "Enquiries sent to you", text: "Straight to your inbox or dashboard." },
     ],
-    process: [
-      { title: "Listen", text: "We map who should enquire and what they need to know first." },
-      { title: "Shape", text: "The page order follows that path, with one primary action." },
-      { title: "Build", text: "We design and develop the site so it stays quick and easy to read." },
-      { title: "Launch", text: "You review it, we adjust, and the site goes live with a handover." },
-    ],
+    weDo: ["Design and build the site", "Test it on real phones and computers"],
+    youDo: ["Tell us who your customers are", "Approve what goes on the site"],
+    process: ["Listen", "Design", "Build", "Launch"],
+    workSlugs: ["ninh-studio", "green-lotus-landscape", "raindrops-beauty-salon"],
     faqs: [
-      { question: "Is this a brochure site?", answer: "It can explain the business, but the page is judged on enquiries, not on how many sections it has." },
-      { question: "Can you match a brand I already have?", answer: "Yes. We work with your existing colours and type where they are already decided." },
-      { question: "Will it work on a phone?", answer: "Yes. The layout is designed for a phone first, then opened out for larger screens." },
-      { question: "Do you write the words?", answer: "We draft the structure and the calls to action. You approve anything a customer will read." },
-      { question: "What does it cost?", answer: "It depends on the number of pages and the form. We quote before any work starts." },
+      { question: "Is this just a brochure site?", answer: "No. It is built to get enquiries, not just to look nice." },
+      { question: "What does it cost?", answer: "We agree a price after a short call, before any work starts." },
     ],
-    price: null,
-    mock: "funnel",
+    related: ["content-and-seo", "managed-support"],
+    availability: "core",
   },
   {
-    number: "02",
-    slug: "lead-funnels-and-forms",
-    name: "Lead Funnels and Forms",
-    hue: "crimson",
-    menu: "Forms that capture, qualify and route every lead.",
-    summary: "Smart forms and multi-step funnels that capture, qualify and route every enquiry to the right place.",
-    outcome: "No lost leads",
-    tags: ["Forms", "Funnels", "Routing", "Follow-up"],
-    intro: "A good form asks only what you need, in an order a busy person will finish. The answers then land where someone can act on them.",
-    included: [
-      "A short form or a stepped funnel",
-      "Questions that qualify the enquiry",
-      "Routing to the right inbox or dashboard",
-      "A confirmation the sender can trust",
-      "A spam check that stays out of the way",
-      "Notes on what to do with each lead",
+    slug: "content-and-seo",
+    name: "Google search",
+    menu: "Show up when people search for what you do.",
+    summary: "We help your business appear on Google and keep your content fresh, so new customers find you.",
+    accent: "#5baa47",
+    outputs: [
+      { title: "Search research", text: "What your customers actually type into Google." },
+      { title: "Pages and posts", text: "Written and published for you each month." },
+      { title: "A monthly report", text: "What is working and what we will do next." },
     ],
-    process: [
-      { title: "Define", text: "We list the questions that change how you reply." },
-      { title: "Draft", text: "The form is ordered so people can finish it on a phone." },
-      { title: "Connect", text: "Submissions go to email, a dashboard, or both." },
-      { title: "Prove", text: "We test the path before it is treated as live." },
-    ],
+    weDo: ["Research, write and publish", "Fix what holds your site back"],
+    youDo: ["Approve what we publish", "Share what you know"],
+    process: ["Audit", "Plan", "Publish", "Improve"],
+    workSlugs: [],
     faqs: [
-      { question: "Why not use a booking link alone?", answer: "A booking link skips the questions that tell you whether the enquiry is a good fit." },
-      { question: "Can the form have more than one step?", answer: "Yes, when the extra step earns its place. We keep each step short." },
-      { question: "Where do the answers go?", answer: "To the inbox or dashboard we agree. Nothing is stored without a purpose you have approved." },
-      { question: "Can I change the questions later?", answer: "Yes. On a support arrangement we can revise them with you. On a focused build, changes after launch are quoted." },
-      { question: "What does it cost?", answer: "A form on its own is a smaller piece of work than a full website. We quote the actual scope." },
+      { question: "How long does it take?", answer: "It builds over months, not weeks. We report monthly so you can see the direction." },
+      { question: "Who owns the content?", answer: "You do." },
     ],
-    price: null,
-    mock: "funnel",
+    related: ["websites-and-funnels", "paid-media"],
+    availability: "on-request",
   },
   {
-    number: "03",
-    slug: "pt-dashboards",
-    name: "PT Dashboards",
-    hue: "orange",
-    menu: "One place for a personal trainer’s new enquiries.",
-    summary: "A website with a dashboard for personal trainers, where leads from your funnel land in one place and are easy to manage.",
-    outcome: "Less admin, more training",
-    tags: ["Dashboard", "Enquiries", "Clients", "Funnel"],
-    intro: "Personal trainers lose time chasing messages across apps. The dashboard is the place those funnel enquiries land, so follow-up is visible.",
-    included: [
-      "A site path that feeds the dashboard",
-      "A list of new enquiries",
-      "A simple way to see what needs a reply",
-      "Room for client notes you choose to keep",
-      "A weekly view of what came in",
-      "Access that stays with you",
+    slug: "paid-media",
+    name: "Online ads",
+    menu: "Ads on Google and social media that bring enquiries.",
+    summary: "We set up and run your ads and show you, in one simple report, what the money produced.",
+    accent: "#f08a2a",
+    outputs: [
+      { title: "Ads that are tested", text: "Different versions, so you keep the best." },
+      { title: "One simple report", text: "Spend and results on one page." },
+      { title: "Warnings", text: "We tell you early if something stops working." },
     ],
-    process: [
-      { title: "Shadow the day", text: "We ask how new clients arrive and how you reply today." },
-      { title: "Keep it small", text: "The first version shows enquiries and follow-ups, not every possible report." },
-      { title: "Connect the funnel", text: "The website form and the dashboard share one path." },
-      { title: "Hand it over", text: "You can run the day without a walkthrough every morning." },
-    ],
+    weDo: ["Build and test the ads", "Report what they earn"],
+    youDo: ["Set the budget", "Approve every ad"],
+    process: ["Review", "Set up", "Test", "Report"],
+    workSlugs: [],
     faqs: [
-      { question: "Is this a full gym platform?", answer: "No. It is a website and a dashboard for enquiries and follow-up. We keep the feature list general until you confirm the detail." },
-      { question: "Can my clients log in?", answer: "Only if we agree that scope. The first job is your view of new enquiries." },
-      { question: "Does it replace my booking tool?", answer: "Not by default. It can sit beside one, or replace a scattered set of links if that is the brief." },
-      { question: "Where is the data kept?", answer: "We prefer a provider that can store data in the UK or the EU, and we will name it in the proposal." },
-      { question: "What does it cost?", answer: "It depends on how much of the day the dashboard needs to cover. We quote before we build." },
+      { question: "Do you control my ad accounts?", answer: "No. The accounts and the budget stay yours." },
+      { question: "Can you promise results?", answer: "No. We make results easy to see and act on." },
     ],
-    price: null,
-    mock: "pt",
+    related: ["websites-and-funnels", "growth-audit-and-roadmap"],
+    availability: "on-request",
   },
   {
-    number: "04",
-    slug: "salon-dashboards",
-    name: "Salon Dashboards",
-    hue: "amber",
-    menu: "Enquiries and follow-ups for salons and barbers.",
-    summary: "The same funnel-powered approach for salons and barbershops, giving one view of new enquiries and follow-ups.",
-    outcome: "A fuller diary",
-    tags: ["Dashboard", "Enquiries", "Follow-ups", "Funnel"],
-    intro: "Salons and barbershops live on the diary. The dashboard shows new enquiries and the follow-ups that would otherwise sit in a busy inbox.",
-    included: [
-      "A site path into one enquiry list",
-      "Follow-up reminders you can see at a glance",
-      "A simple day view",
-      "The same funnel system as the public website",
-      "Room to add services you actually sell",
-      "A handover the team can follow",
+    slug: "outbound-outreach",
+    name: "Outreach",
+    menu: "We contact the right businesses for you.",
+    summary: "Targeted emails and messages to the businesses you want to work with, sent every week and approved by you.",
+    accent: "#de2f4b",
+    outputs: [
+      { title: "A target list", text: "Who to contact and why, agreed first." },
+      { title: "Messages that sound like you", text: "Written for each person, approved by you." },
+      { title: "Replies sorted", text: "You only see the ones that matter." },
     ],
-    process: [
-      { title: "Walk the desk", text: "We learn how the phone, the form and the chair connect." },
-      { title: "Set the view", text: "New enquiries, follow-ups and the day ahead are the first screen." },
-      { title: "Join the funnel", text: "What the website asks is what the dashboard shows." },
-      { title: "Leave it usable", text: "The team can pick it up without a long manual." },
-    ],
+    weDo: ["Find the businesses and write the messages", "Send them and sort the replies"],
+    youDo: ["Approve who we contact", "Take the conversations that matter"],
+    process: ["Choose targets", "Write", "Send", "Follow up"],
+    workSlugs: [],
     faqs: [
-      { question: "Is this a till or a booking product?", answer: "No. It is the enquiry and follow-up layer. Payments and chair booking stay out of scope until you ask for them." },
-      { question: "Will it suit a barbershop as well as a salon?", answer: "Yes. The layout follows enquiries and the diary, not a particular treatment menu." },
-      { question: "Can more than one person use it?", answer: "Yes, if the brief includes more than one login. We confirm that before we quote." },
-      { question: "Can I see sample data first?", answer: "The work page shows an illustrative dashboard. It is marked as sample data, not a client result." },
-      { question: "What does it cost?", answer: "We price it against the agreed screens. There is no published package price yet." },
+      { question: "Is this spam?", answer: "No. Small, targeted batches from your own domain, with an opt-out on every message." },
+      { question: "Does it follow UK rules?", answer: "We design for UK business-to-business rules. Take your own legal advice for your sector." },
     ],
-    price: null,
-    mock: "salon",
+    related: ["growth-audit-and-roadmap", "websites-and-funnels"],
+    availability: "core",
   },
   {
-    number: "05",
-    slug: "it-consulting",
-    name: "IT Consulting",
-    hue: "blue",
-    menu: "Plain-English advice before you commit to tools.",
-    summary: "Practical technology advice, from audits and roadmaps to tool choices, explained in plain English.",
-    outcome: "Confident technology decisions",
-    tags: ["Audit", "Strategy", "Roadmap", "Tooling"],
-    intro: "Consulting at AuraRush is a decision aid. You leave with a recommendation you can explain to someone else, not a slide full of jargon.",
-    included: [
-      "A short audit of what you use today",
-      "A Now, Next, Later roadmap",
-      "Tool choices explained in plain English",
-      "Risks called out without drama",
-      "A written note you can keep",
-      "A follow-up conversation",
+    slug: "client-systems-and-dashboards",
+    name: "Client dashboards",
+    menu: "One place to follow up and look after customers.",
+    summary: "A simple dashboard for trainers, salons and similar businesses, so no enquiry or client is forgotten.",
+    accent: "#a23b8c",
+    outputs: [
+      { title: "Enquiry list", text: "Who needs a reply, and when." },
+      { title: "Client area", text: "Optional logins for plans, check-ins or progress." },
+      { title: "Weekly summary", text: "What came in and what is waiting." },
     ],
-    process: [
-      { title: "Brief", text: "We agree the decision you are trying to make." },
-      { title: "Look", text: "We review the current tools and the gaps that cost time." },
-      { title: "Recommend", text: "You get a sequence, not a catalogue." },
-      { title: "Decide", text: "You choose what to build, buy or leave alone." },
-    ],
+    weDo: ["Build the dashboard", "Set up reminders and summaries"],
+    youDo: ["Tell us how your day works", "Decide what you keep about each client"],
+    process: ["Shadow the day", "Keep it simple", "Connect", "Hand over"],
+    workSlugs: ["stpt-coaching", "mindfull-food-fitness"],
     faqs: [
-      { question: "Is this only for large companies?", answer: "No. It is aimed at growing businesses that need a clear next step, including personal trainers and salons." },
-      { question: "Will you sell me software?", answer: "We do not take a hidden commission on tool choices. If that ever changes, we will say so before you appoint us." },
-      { question: "How long does it take?", answer: "A focused advisory piece is often a few conversations plus a written note. The proposal will name the time." },
-      { question: "Can consulting lead into a build?", answer: "Yes. You can stop after the advice, or ask AuraRush to build what the roadmap recommends." },
-      { question: "What does it cost?", answer: "We quote the engagement. The site does not show a day rate." },
+      { question: "Is this a full booking or gym system?", answer: "No. Just the enquiries, follow-ups and client area." },
+      { question: "Where is the data kept?", answer: "UK or EU providers where possible, named in the proposal." },
     ],
-    price: null,
-    mock: "consulting",
+    related: ["websites-and-funnels", "managed-support"],
+    availability: "core",
   },
   {
-    number: "06",
-    slug: "it-services",
-    name: "IT Services",
-    hue: "green",
-    menu: "Hosting, updates and support after launch.",
-    summary: "Hosting, maintenance, updates and support that keep your website and systems running.",
-    outcome: "Dependable, secure systems",
-    tags: ["Hosting", "Support", "Security", "Updates"],
-    intro: "A launch is the start of the system’s working life. IT services cover hosting, updates and a person to contact when something needs attention.",
-    included: [
-      "Hosting for the website we agree",
-      "Updates and housekeeping",
-      "A named way to ask for help",
-      "Security basics kept current",
-      "Small improvements in an agreed rhythm",
-      "Plain notes when something changes",
+    slug: "growth-audit-and-roadmap",
+    name: "Marketing review",
+    menu: "We check what is working and tell you what to do first.",
+    summary: "A short review of how people find you and contact you, ending in a clear plan: now, next and later.",
+    accent: "#f5c518",
+    outputs: [
+      { title: "What is working", text: "And what is leaking enquiries." },
+      { title: "The best next steps", text: "The few things worth doing first." },
+      { title: "A written plan", text: "Now, next and later, in plain English." },
     ],
-    process: [
-      { title: "Take stock", text: "We list what must stay up and who depends on it." },
-      { title: "Stabilise", text: "Hosting, backups and access are put in order." },
-      { title: "Watch", text: "We keep an eye on updates and the issues that repeat." },
-      { title: "Improve", text: "Agreed changes are made without a fresh project every time." },
-    ],
+    weDo: ["Review your website, search and ads", "Write the plan"],
+    youDo: ["Share access and goals", "Decide what to do"],
+    process: ["Brief", "Look", "Recommend", "Decide"],
+    workSlugs: [],
     faqs: [
-      { question: "Is this a helpdesk for every device in the office?", answer: "Only if that is the agreed scope. The usual starting point is the website and the systems we have built." },
-      { question: "Do you work outside the UK?", answer: "AuraRush is UK-based. Remote support is normal. On-site work is only offered when we agree it." },
-      { question: "What if something breaks?", answer: "You contact admin@aurarush.org. The support arrangement names how quickly we respond." },
-      { question: "Can I leave?", answer: "Yes. We will hand over access and notes so you are not locked in." },
-      { question: "What does it cost?", answer: "Support is quoted against what we are looking after. There is no figure on this page until one is agreed." },
+      { question: "Will you try to sell me something?", answer: "No. The review stands alone. You can act on it with anyone." },
+      { question: "How long does it take?", answer: "A few conversations and a written plan." },
     ],
-    price: null,
-    mock: "consulting",
+    related: ["outbound-outreach", "websites-and-funnels"],
+    availability: "core",
+    startHere: true,
+  },
+  {
+    slug: "managed-support",
+    name: "Ongoing support",
+    menu: "Hosting, updates and a person to call.",
+    summary: "We keep your website running, safe and improving, with a named person who answers.",
+    accent: "#7fc8a9",
+    outputs: [
+      { title: "Hosting and care", text: "Backups, updates and security." },
+      { title: "A named contact", text: "A stated reply time." },
+      { title: "Monthly improvements", text: "Small changes, no new project each time." },
+    ],
+    weDo: ["Keep it running and safe", "Make agreed improvements"],
+    youDo: ["Tell us what changes", "Approve changes before they go live"],
+    process: ["Take stock", "Secure", "Watch", "Improve"],
+    workSlugs: [],
+    faqs: [
+      { question: "Can I leave?", answer: "Yes. We hand over access and notes." },
+      { question: "What does it cost?", answer: "Quoted against what we look after." },
+    ],
+    related: ["websites-and-funnels", "client-systems-and-dashboards"],
+    availability: "core",
   },
 ];
 
 export function getService(slug: string) {
   return services.find((service) => service.slug === slug);
 }
+
+/** Old service URLs to their new homes. Used by next.config.ts redirects. */
+export const legacyServiceRedirects: { from: string; to: ServiceSlug }[] = [
+  { from: "funnel-websites", to: "websites-and-funnels" },
+  { from: "lead-funnels-and-forms", to: "websites-and-funnels" },
+  { from: "pt-dashboards", to: "client-systems-and-dashboards" },
+  { from: "salon-dashboards", to: "client-systems-and-dashboards" },
+  { from: "it-consulting", to: "growth-audit-and-roadmap" },
+  { from: "it-services", to: "managed-support" },
+];

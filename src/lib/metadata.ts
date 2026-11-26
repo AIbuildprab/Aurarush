@@ -7,6 +7,7 @@ type PageMeta = {
   path: string;
 };
 
+/** Per-page metadata. The Open Graph image comes from the root `opengraph-image.tsx`. */
 export function pageMetadata({ title, description, path }: PageMeta): Metadata {
   const url = path === "/" ? site.url : `${site.url}${path}`;
 
@@ -24,20 +25,11 @@ export function pageMetadata({ title, description, path }: PageMeta): Metadata {
       siteName: site.name,
       locale: "en_GB",
       type: "website",
-      images: [
-        {
-          url: "/brand/og.png",
-          width: 1200,
-          height: 630,
-          alt: "AuraRush",
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/brand/og.png"],
     },
   };
 }

@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
+import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
 import { getInsight, insights } from "@/data/insights";
 import { site } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -13,57 +16,68 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const article = getInsight(slug);
   if (!article) return {};
-  return pageMetadata({
-    title: article.title,
-    description: article.excerpt,
-    path: `/insights/${article.slug}`,
-  });
+  return pageMetadata({ title: article.title, description: article.excerpt, path: `/insights/${article.slug}` });
 }
 
-export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
+async function InsightContent({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = getInsight(slug);
   if (!article) notFound();
   const related = insights.filter((item) => item.slug !== article.slug).slice(0, 2);
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    datePublished: article.dateIso,
-    author: { "@type": "Organization", name: "AuraRush" },
-    publisher: { "@type": "Organization", name: "AuraRush", email: site.email },
-    description: article.excerpt,
-  };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.title,
+            datePublished: article.dateIso,
+            dateModified: article.dateIso,
+            inLanguage: "en-GB",
+            author: { "@type": "Organization", name: site.name },
+            publisher: { "@type": "Organization", name: site.name },
+            description: article.excerpt,
+            mainEntityOfPage: `${site.url}/insights/${article.slug}`,
+          },
+          breadcrumbLd([{ name: "Home", path: "/" }, { name: "Insights", path: "/insights" }, { name: article.title, path: `/insights/${article.slug}` }], site.url),
+        ]}
+      />
       <PageHero
-        eyebrow={article.category}
         title={article.title}
         intro={`${article.date} · ${article.readTime}`}
         crumbs={[{ href: "/insights", label: "Insights" }, { label: article.title }]}
       />
       <article className="section">
-        <div className="container-site max-w-[68ch]">
+        <div className="container-wide prose-body">
           {article.blocks.map((block, index) => {
-            if (block.type === "h2") return <h2 key={index} className="mt-10 font-display text-3xl font-light">{block.text}</h2>;
-            if (block.type === "h3") return <h3 key={index} className="mt-8 text-xl">{block.text}</h3>;
-            if (block.type === "quote") return <blockquote key={index} className="my-8 border-l border-white/20 pl-6 font-display text-2xl font-light">“{block.text}”</blockquote>;
-            return <p key={index} className="mt-4 text-muted">{block.text}</p>;
+            if (block.type === "h2") return <h2 key={index}>{block.text}</h2>;
+            if (block.type === "h3") return <h3 key={index}>{block.text}</h3>;
+            if (block.type === "quote") return <blockquote key={index}>{block.text}</blockquote>;
+            return <p key={index}>{block.text}</p>;
           })}
         </div>
-        <div className="container-site mt-16">
-          <h2 className="font-mono text-xs tracking-[0.14em] text-muted uppercase">Related</h2>
+        <div className="container-wide mt-16">
+          <h2 className="label">Keep reading</h2>
           <ul className="mt-4 grid gap-4 md:grid-cols-2">
             {related.map((item) => (
               <li key={item.slug}>
-                <Link className="block border-t border-white/10 py-4" href={`/insights/${item.slug}`}>{item.title}</Link>
+                <Link className="link font-display text-xl" href={`/insights/${item.slug}`}>{item.title}</Link>
               </li>
             ))}
           </ul>
         </div>
       </article>
+      <CtaBand />
     </>
+  );
+}
+
+export default function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
+  return (
+    <Suspense fallback={null}>
+      <InsightContent params={params} />
+    </Suspense>
   );
 }

@@ -1,41 +1,38 @@
 import Link from "next/link";
-import { Aurora } from "@/components/ui/aurora";
 import { WordReveal } from "@/components/ui/word-reveal";
 
 export function PageHero({
-  eyebrow,
   title,
-  highlight,
   intro,
   crumbs,
+  children,
 }: {
-  eyebrow: string;
   title: string;
-  highlight?: string;
-  intro: string;
+  intro?: string;
   crumbs: { href?: string; label: string }[];
+  children?: React.ReactNode;
 }) {
   return (
-    <section className="relative flex min-h-[60svh] items-end overflow-hidden pt-28 pb-16" aria-labelledby="page-title">
-      <Aurora variant="corner" />
-      <div className="container-site relative">
+    <section className="border-b border-line" aria-labelledby="page-title">
+      <div className="container-wide pt-10 pb-14 lg:pt-14 lg:pb-20">
         <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-2 font-mono text-xs tracking-[0.14em] text-muted uppercase">
-            <li><Link href="/">Home</Link></li>
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">
+            <li><Link className="link" href="/">Home</Link></li>
             {crumbs.map((crumb) => (
               <li key={crumb.label} className="flex items-center gap-2">
                 <span aria-hidden="true">/</span>
-                {crumb.href ? <Link href={crumb.href}>{crumb.label}</Link> : <span aria-current="page">{crumb.label}</span>}
+                {crumb.href ? <Link className="link" href={crumb.href}>{crumb.label}</Link> : <span aria-current="page" className="text-ink">{crumb.label}</span>}
               </li>
             ))}
           </ol>
         </nav>
-        <p className="eyebrow mt-8">
-          <span className="eyebrow-dot" aria-hidden="true" />
-          {eyebrow}
-        </p>
-        <WordReveal id="page-title" as="h1" text={title} highlight={highlight} className="h1 mt-4 max-w-[min(14ch,100%)]" />
-        <p className="lead mt-6">{intro}</p>
+        <div className="mt-8 grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <WordReveal as="h1" id="page-title" text={title} className="h1 !text-[clamp(2.5rem,6.5vw,5.75rem)]" />
+            {intro ? <p className="lead mt-6">{intro}</p> : null}
+          </div>
+        </div>
+        {children}
       </div>
     </section>
   );

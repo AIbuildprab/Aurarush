@@ -13,7 +13,7 @@ export function BookCall({
   children?: React.ReactNode;
 }) {
   const classes = cn(
-    "btn inline-flex",
+    "btn",
     variant === "primary" && "btn-primary",
     variant === "secondary" && "btn-secondary",
     variant === "text" && "btn-text",

@@ -1,46 +1,50 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
-import { SampleMock } from "@/components/mock/sample-mock";
-import { SHOW_CLIENT_WORK, workItems } from "@/data/work";
+import { BrowserFrame } from "@/components/work/browser-frame";
+import { getPublishedWork } from "@/data/work";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Work",
-  description: "Sample builds showing a funnel website, trainer and salon dashboards, and an IT roadmap. Illustrative, not client work.",
+  description: "Live websites and client systems built by AuraRush for small businesses: coaching, photography, landscaping and beauty.",
   path: "/work",
 });
 
 export default function WorkPage() {
-  const items = SHOW_CLIENT_WORK ? workItems.filter((item) => !item.sample) : workItems;
-
+  const work = getPublishedWork();
   return (
     <>
       <PageHero
-        eyebrow="Work"
-        title="Sample builds, clearly labelled."
-        intro="These screens show how a funnel, a dashboard and a technology plan fit together. They use sample data. They are not client results."
+        title="Work you can open and judge."
+        intro="Live projects, or marked in progress. Numbers shown are only those the client has published."
         crumbs={[{ label: "Work" }]}
       />
-      <section className="section" aria-labelledby="work-list">
-        <div className="container-site">
-          <h2 id="work-list" className="sr-only">Sample builds</h2>
-          <div className="grid gap-12 md:grid-cols-2">
-            {items.map((item) => (
-              <article key={item.slug}>
-                <SampleMock type={item.mock} hue={item.hue} />
-                <p className="mt-4 font-mono text-xs tracking-[0.14em] text-muted uppercase">{item.sector}</p>
-                <h3 className="h3 mt-2">{item.title}</h3>
-                <p className="mt-2 text-muted">{item.summary}</p>
-                <Link className="btn btn-text mt-4" href={`/work/${item.slug}`}>
-                  {SHOW_CLIENT_WORK ? "Read the story" : "View the sample"}
-                  <ArrowRight className="arrow-x size-4" aria-hidden="true" />
+      <section className="section" aria-label="Case studies">
+        <div className="container-wide grid gap-16">
+          {work.map((study, index) => (
+            <article key={study.slug} className="grid items-center gap-8 lg:grid-cols-12">
+              <div className={index % 2 === 1 ? "lg:col-span-7 lg:col-start-6 lg:row-start-1" : "lg:col-span-7"}>
+                <Link href={`/work/${study.slug}`} aria-label={`${study.client} case study`} className="lift block">
+                  <BrowserFrame src={study.frames.desktop} alt={study.frames.alt} url={study.liveUrl} priority={index === 0} />
                 </Link>
-              </article>
-            ))}
-          </div>
+              </div>
+              <div className={index % 2 === 1 ? "lg:col-span-5 lg:col-start-1 lg:row-start-1" : "lg:col-span-5"}>
+                <p className="label">{study.sector} · {study.location}</p>
+                <h2 className="h3 mt-3">{study.client}</h2>
+                <p className="mt-2 font-display text-xl">{study.headline}</p>
+                <p className="mt-3 text-muted">{study.summary}</p>
+                {study.status === "in-progress" ? <p className="mt-3 text-sm font-semibold">In progress</p> : null}
+                <Link className="btn btn-text mt-4" href={`/work/${study.slug}`}>
+                  Read the case study <ArrowUpRight className="card-arrow size-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
+      <CtaBand />
     </>
   );
 }

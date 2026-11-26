@@ -1,0 +1,52 @@
+{
+  "stpt-coaching": {
+    "desktop": [
+      1100,
+      5347
+    ],
+    "phone": [
+      480,
+      6516
+    ]
+  },
+  "mindfull-food-fitness": {
+    "desktop": [
+      1100,
+      5347
+    ],
+    "phone": [
+      480,
+      12308
+    ]
+  },
+  "ninh-studio": {
+    "desktop": [
+      1100,
+      5347
+    ],
+    "phone": [
+      480,
+      12308
+    ]
+  },
+  "green-lotus-landscape": {
+    "desktop": [
+      1100,
+      5072
+    ],
+    "phone": [
+      480,
+      11106
+    ]
+  },
+  "raindrops-beauty-salon": {
+    "desktop": [
+      1100,
+      5347
+    ],
+    "phone": [
+      480,
+      12308
+    ]
+  }
+}

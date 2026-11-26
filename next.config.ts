@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
+import { legacyServiceRedirects } from "./src/data/services";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
@@ -11,6 +11,21 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  async redirects() {
+    return [
+      ...legacyServiceRedirects.map(({ from, to }) => ({
+        source: `/services/${from}`,
+        destination: `/services/${to}`,
+        permanent: true,
+      })),
+      { source: "/framework", destination: "/", permanent: true },
+      { source: "/funnel-check", destination: "/services", permanent: true },
+      { source: "/work/funnel-website", destination: "/work", permanent: true },
+      { source: "/work/pt-dashboard", destination: "/work/stpt-coaching", permanent: true },
+      { source: "/work/salon-dashboard", destination: "/work/raindrops-beauty-salon", permanent: true },
+      { source: "/work/it-roadmap", destination: "/work", permanent: true },
+    ];
   },
 };
 
