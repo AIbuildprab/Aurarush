@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "About",
-  description: "AuraRush is a UK-based business that builds AI automation for growth, with a person reviewing every piece of work.",
+  description: "AuraRush is a UK-based digital growth agency. A named person owns every project.",
   path: "/about",
 });
 
@@ -13,8 +13,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="Growth systems, with someone accountable."
-        intro="Every business needs attention, a way to convert it, and a way to turn it into revenue. We build and support all three."
+        title="A growth agency, with someone accountable."
+        intro="Every business needs attention, a way to convert it, and a way to turn it into revenue. We build and run all three."
         crumbs={[{ label: "About" }]}
       />
 

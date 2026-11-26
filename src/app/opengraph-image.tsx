@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "AuraRush: AI automation for growth";
+export const alt = "AuraRush: digital growth agency";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -19,7 +19,7 @@ export default function OpenGraphImage() {
           <div style={{ fontSize: 44, fontWeight: 700, color: "#17141f" }}>AuraRush</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 80, lineHeight: 1.05, color: "#17141f", maxWidth: 980 }}>AI automation for growth, from first click to repeat customer.</div>
+          <div style={{ fontSize: 80, lineHeight: 1.05, color: "#17141f", maxWidth: 980 }}>The growth agency for local businesses.</div>
           <div style={{ display: "flex", gap: 16, fontSize: 28, color: "#4a4557" }}>
             <span style={{ color: "#1f5f99" }}>Attention</span>
             <span>→</span>

@@ -1,9 +1,9 @@
 import type { ChannelId, StageId } from "@/data/framework";
 
 export type ServiceSlug =
-  | "outbound-automation"
-  | "content-and-search-automation"
-  | "paid-media-automation"
+  | "outbound-outreach"
+  | "content-and-seo"
+  | "paid-media"
   | "websites-and-funnels"
   | "client-systems-and-dashboards"
   | "growth-audit-and-roadmap"
@@ -19,8 +19,8 @@ export type Service = {
   /** Hero line on the service page. */
   summary: string;
   outputs: { title: string; text: string }[];
-  aiRole: string[];
-  humanRole: string[];
+  weDo: string[];
+  youDo: string[];
   process: string[];
   workSlugs: string[];
   faqs: { question: string; answer: string }[];
@@ -32,19 +32,19 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "outbound-automation",
-    name: "Outbound automation",
+    slug: "outbound-outreach",
+    name: "Outbound outreach",
     stage: "attention",
     channels: ["outbound"],
-    menu: "Email and social outreach that runs weekly.",
-    summary: "Research, first lines, sequences and reply handling, with a person approving what goes out.",
+    menu: "Email and social outreach, every week.",
+    summary: "Targeted email and social outreach to the businesses you want, run every week and approved by you.",
     outputs: [
       { title: "Prospect profile", text: "Who to reach and why, agreed first." },
       { title: "Outreach system", text: "List, drafting, sending and follow-up, connected." },
       { title: "Weekly summary", text: "What went out and what came back." },
     ],
-    aiRole: ["Research prospects and draft first lines", "Sort replies and update records"],
-    humanRole: ["You approve targets and messages", "A person reviews copy before sending"],
+    weDo: ["Research prospects and write each opening line", "Run the sequences and sort the replies"],
+    youDo: ["Approve who we contact and what we say", "Take the conversations that matter"],
     process: ["Profile", "Build", "Pilot", "Run"],
     workSlugs: [],
     faqs: [
@@ -55,42 +55,42 @@ export const services: Service[] = [
     availability: "core",
   },
   {
-    slug: "content-and-search-automation",
-    name: "Content and search automation",
+    slug: "content-and-seo",
+    name: "Content and SEO",
     stage: "attention",
     channels: ["organic-content", "search"],
-    menu: "Publishing and search work that keeps going.",
-    summary: "A content and SEO pipeline: research, briefs, repurposing and publishing, with an editor in the loop.",
+    menu: "Content and search work that keeps going.",
+    summary: "Content and SEO that compound: research, briefs, publishing and monthly reporting.",
     outputs: [
       { title: "Content pipeline", text: "One source becomes posts, clips and a newsletter." },
       { title: "Search research", text: "The questions customers ask, grouped by topic." },
       { title: "Monthly report", text: "What is rising and what needs work." },
     ],
-    aiRole: ["Draft and repurpose from your material", "Group search questions and spot gaps"],
-    humanRole: ["An editor approves everything published", "A person checks facts and claims"],
+    weDo: ["Plan, write and repurpose content from your material", "Research search questions and fix on-page issues"],
+    youDo: ["Approve everything we publish", "Share what you know"],
     process: ["Audit", "Design", "Build", "Improve"],
     workSlugs: [],
     faqs: [
-      { question: "Will search engines penalise AI-assisted content?", answer: "They judge usefulness. A person reviews everything we publish." },
+      { question: "How long does SEO take?", answer: "It builds over months, not weeks. We report monthly so you can see the direction." },
       { question: "Who owns the content?", answer: "You do." },
     ],
     related: ["websites-and-funnels", "growth-audit-and-roadmap"],
     availability: "on-request",
   },
   {
-    slug: "paid-media-automation",
-    name: "Paid media automation",
+    slug: "paid-media",
+    name: "Paid media",
     stage: "attention",
     channels: ["paid-advertising"],
-    menu: "Creative testing and one view of ad spend.",
-    summary: "Automation around your paid campaigns: creative variations, one report, alerts when spend drifts.",
+    menu: "Paid social and search, with one clear report.",
+    summary: "Paid campaigns built around your margins, with creative testing and one report of what your spend produced.",
     outputs: [
       { title: "Testing plan", text: "Structured variations and how to read them." },
       { title: "Reporting view", text: "Spend and results from each platform on one page." },
       { title: "Alerts", text: "A message when results move outside limits." },
     ],
-    aiRole: ["Produce creative variations", "Combine platform data into one report"],
-    humanRole: ["You set budget and goals", "A person approves all creative"],
+    weDo: ["Build and test creative variations", "Report spend and results in one view"],
+    youDo: ["Set budget and goals", "Approve all creative"],
     process: ["Review", "Connect", "Test", "Report"],
     workSlugs: [],
     faqs: [
@@ -112,8 +112,8 @@ export const services: Service[] = [
       { title: "Forms and funnels", text: "Short forms that ask only what changes your reply." },
       { title: "Routing", text: "Answers land in your inbox or dashboard." },
     ],
-    aiRole: ["Draft page structure and first-pass copy", "Sort and summarise enquiries"],
-    humanRole: ["A designer and developer build and test", "You approve everything customers read"],
+    weDo: ["Design and build the site and forms", "Test on real devices before launch"],
+    youDo: ["Tell us who should enquire", "Approve everything customers read"],
     process: ["Listen", "Shape", "Build", "Launch"],
     workSlugs: ["ninh-studio", "green-lotus-landscape", "raindrops-beauty-salon"],
     faqs: [
@@ -135,8 +135,8 @@ export const services: Service[] = [
       { title: "Client area", text: "Optional logins for plans, check-ins or progress." },
       { title: "Weekly view", text: "What came in and what is waiting." },
     ],
-    aiRole: ["Summarise enquiries, suggest replies", "Remind you when follow-ups are due"],
-    humanRole: ["You decide what is kept about each client", "A person reviews messages before sending"],
+    weDo: ["Build the dashboard and client area", "Set up reminders and weekly summaries"],
+    youDo: ["Tell us how the day really runs", "Decide what is kept about each client"],
     process: ["Shadow the day", "Keep it small", "Connect", "Hand over"],
     workSlugs: ["stpt-coaching", "mindfull-food-fitness"],
     faqs: [
@@ -158,15 +158,15 @@ export const services: Service[] = [
       { title: "Channel recommendation", text: "Which of the seven suit you." },
       { title: "Roadmap", text: "Now, Next, Later, in plain English." },
     ],
-    aiRole: ["Analyse your data and public presence", "Draft the first review"],
-    humanRole: ["A senior person leads and writes it", "You decide what to build"],
+    weDo: ["Review your data and public presence", "Write the roadmap"],
+    youDo: ["Share access and goals", "Decide what to build"],
     process: ["Brief", "Look", "Recommend", "Decide"],
     workSlugs: [],
     faqs: [
       { question: "Will you try to sell me a build?", answer: "No. The audit stands alone." },
       { question: "How long does it take?", answer: "A few conversations and a written note." },
     ],
-    related: ["outbound-automation", "websites-and-funnels"],
+    related: ["outbound-outreach", "websites-and-funnels"],
     availability: "core",
     startHere: true,
   },
@@ -182,8 +182,8 @@ export const services: Service[] = [
       { title: "Named contact", text: "A stated response time." },
       { title: "Monthly improvements", text: "Small changes on an agreed rhythm." },
     ],
-    aiRole: ["Monitor uptime and errors", "Summarise changes and issues"],
-    humanRole: ["A named person responds and fixes", "You approve changes before they go live"],
+    weDo: ["Monitor, update and fix", "Make agreed improvements"],
+    youDo: ["Tell us what changes", "Approve changes before they go live"],
     process: ["Take stock", "Stabilise", "Watch", "Improve"],
     workSlugs: [],
     faqs: [

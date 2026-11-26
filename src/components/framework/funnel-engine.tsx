@@ -51,9 +51,9 @@ function Detail({ selection }: { selection: Selection }) {
           <p className="mt-3 text-sm"><span className="font-semibold">Skill: </span>{channel.primarySkill}</p>
         </div>
         <div className="lg:col-span-4">
-          <p className="label">AI adds</p>
+          <p className="label">What we do</p>
           <ul className="mt-3 grid gap-2">
-            {channel.aiRole.map((line) => (
+            {channel.weDo.map((line) => (
               <li key={line} className="flex gap-3">
                 <span className="stage-dot mt-2.5" aria-hidden="true" />
                 <span>{line}</span>
@@ -97,13 +97,13 @@ function Detail({ selection }: { selection: Selection }) {
           ))}
         </ul>
       ) : (
-        <p className="text-muted lg:col-span-7">Seven channels, inbound and outbound. Select one to see what AI adds.</p>
+        <p className="text-muted lg:col-span-7">Seven channels, inbound and outbound. Select one to see what we do.</p>
       )}
     </div>
   );
 }
 
-/** The interactive three-stage funnel. Select a channel or a stage to read how AI automation applies. */
+/** The interactive three-stage funnel. Select a channel or a stage to see what we do. */
 export function FunnelEngine() {
   const [selection, setSelection] = useState<Selection>({ kind: "channel", id: "outbound" });
   const [drawn, setDrawn] = useState(false);

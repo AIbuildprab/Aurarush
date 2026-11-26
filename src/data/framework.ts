@@ -23,7 +23,7 @@ export type Channel = {
   direction: "inbound" | "outbound";
   summary: string;
   primarySkill: string;
-  aiRole: string[];
+  weDo: string[];
   serviceSlugs: string[];
   /** offered: we build it. advisory: we advise and support, not a core build. */
   status: "offered" | "advisory";
@@ -68,8 +68,8 @@ export const channels: Channel[] = [
     direction: "inbound",
     summary: "Posts, video and articles that build an audience.",
     primarySkill: "Content creation and video editing",
-    aiRole: ["Repurpose one recording into many formats", "Draft in your voice, for approval"],
-    serviceSlugs: ["content-and-search-automation"],
+    weDo: ["Plan and repurpose content from one recording", "Schedule and publish with your approval"],
+    serviceSlugs: ["content-and-seo"],
     status: "offered",
   },
   {
@@ -78,8 +78,8 @@ export const channels: Channel[] = [
     direction: "inbound",
     summary: "Being found when people search.",
     primarySkill: "SEO",
-    aiRole: ["Find the questions customers ask", "Draft briefs and on-page fixes"],
-    serviceSlugs: ["content-and-search-automation", "websites-and-funnels"],
+    weDo: ["Find the questions customers ask", "Fix pages and write briefs"],
+    serviceSlugs: ["content-and-seo", "websites-and-funnels"],
     status: "offered",
   },
   {
@@ -88,7 +88,7 @@ export const channels: Channel[] = [
     direction: "inbound",
     summary: "The product itself brings customers in.",
     primarySkill: "Product building",
-    aiRole: ["Guide new users to first value", "Trigger follow-ups from usage"],
+    weDo: ["Shape onboarding around first value", "Set up follow-ups from usage"],
     serviceSlugs: ["growth-audit-and-roadmap"],
     status: "advisory",
   },
@@ -98,8 +98,8 @@ export const channels: Channel[] = [
     direction: "inbound",
     summary: "Buying attention directly. Sits between inbound and outbound.",
     primarySkill: "Media buying",
-    aiRole: ["Produce creative variations", "Report spend and results in one view"],
-    serviceSlugs: ["paid-media-automation"],
+    weDo: ["Build and test creative", "Report spend and results in one view"],
+    serviceSlugs: ["paid-media"],
     status: "offered",
   },
   {
@@ -108,7 +108,7 @@ export const channels: Channel[] = [
     direction: "inbound",
     summary: "Reaching customers through someone else's audience.",
     primarySkill: "Partnerships and sales",
-    aiRole: ["Research partner audiences", "Draft introductions for you to send"],
+    weDo: ["Find partner audiences", "Write introductions for you to send"],
     serviceSlugs: ["growth-audit-and-roadmap"],
     status: "advisory",
   },
@@ -118,8 +118,8 @@ export const channels: Channel[] = [
     direction: "outbound",
     summary: "Email and social outreach to chosen businesses.",
     primarySkill: "Email and social outreach, sales",
-    aiRole: ["Build prospect lists from a profile", "Draft first lines, sort replies"],
-    serviceSlugs: ["outbound-automation"],
+    weDo: ["Build prospect lists from a profile", "Write first lines, sort replies"],
+    serviceSlugs: ["outbound-outreach"],
     status: "offered",
   },
   {
@@ -128,7 +128,7 @@ export const channels: Channel[] = [
     direction: "outbound",
     summary: "Events, networking and local introductions.",
     primarySkill: "Networking and sales",
-    aiRole: ["Log contacts and notes", "Send timely follow-ups"],
+    weDo: ["Log contacts and notes", "Send timely follow-ups"],
     serviceSlugs: ["growth-audit-and-roadmap"],
     status: "advisory",
   },

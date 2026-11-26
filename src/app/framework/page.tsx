@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Framework",
-  description: "Attention, conversion, monetisation: the three jobs of a growth system, seven attention channels, and where AI automation fits.",
+  description: "Attention, conversion, monetisation: the three jobs of a growth system, seven attention channels, and how we build for each.",
   path: "/framework",
 });
 
@@ -21,7 +21,7 @@ export default function FrameworkPage() {
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "Framework", path: "/framework" }], site.url)} />
       <PageHero
         title="A growth system has three jobs."
-        intro="Win attention, convert it, turn it into revenue. AI automation can build or support each."
+        intro="Win attention, convert it, turn it into revenue. We build and run each stage."
         crumbs={[{ label: "Framework" }]}
       >
         <Link href="/funnel-check" className="btn btn-text mt-4">

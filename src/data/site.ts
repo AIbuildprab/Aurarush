@@ -3,8 +3,8 @@ export const site = {
   email: "admin@aurarush.org",
   location: "United Kingdom",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aurarush.org",
-  tagline: "AI automation for growth",
-  description: "AI automation for growth: systems that win attention, convert it and turn it into revenue, with people reviewing the work.",
+  tagline: "Digital growth agency",
+  description: "AuraRush is a digital growth agency: websites, search, outreach and client systems that win attention, convert it and turn it into revenue.",
   legal: {
     entity: "",
     companyNumber: "",
@@ -26,7 +26,7 @@ export const navigation = {
   company: [
     { href: "/about", label: "About" },
     { href: "/how-we-work", label: "How we work" },
-    { href: "/trust", label: "Trust and AI use" },
+    { href: "/trust", label: "Our promises" },
     { href: "/contact", label: "Contact" },
   ],
   tools: [{ href: "/funnel-check", label: "Funnel check" }],
@@ -45,9 +45,9 @@ export const stageOptions = [
 ] as const;
 
 export const interests = [
-  "Outbound automation",
-  "Content and search automation",
-  "Paid media automation",
+  "Outbound outreach",
+  "Content and SEO",
+  "Paid media",
   "Website or funnel",
   "Client system or dashboard",
   "Growth audit",
@@ -58,17 +58,17 @@ export const interests = [
 export const timelines = ["As soon as possible", "Within three months", "Later this year", "Just exploring"] as const;
 
 export const commitments = [
-  { title: "A person reviews the work", text: "AI drafts and sorts. A named person checks it first." },
+  { title: "A named person owns the work", text: "You always know who is responsible." },
   { title: "You approve what speaks for you", text: "Nothing goes out in your name unapproved." },
-  { title: "Your data stays yours", text: "Accounts, lists and content stay in your name." },
+  { title: "Your accounts stay yours", text: "Sites, lists and content stay in your name." },
   { title: "Scope and cost in writing", text: "Agreed before any work starts." },
 ] as const;
 
 export const howWeWork = [
-  { title: "Discover", text: "How people find you, and where enquiries get lost." },
-  { title: "Design", text: "A written scope: what is built, who does what, the cost." },
-  { title: "Build", text: "A pilot with every output reviewed." },
-  { title: "Run", text: "Looked after and improved on a regular rhythm." },
+  { title: "Discover", text: "A call to find where growth is leaking." },
+  { title: "Plan", text: "A written scope: what we build, who does what, the cost." },
+  { title: "Build", text: "Built in small pieces, each one shown to you." },
+  { title: "Run", text: "Looked after and improved every month." },
 ] as const;
 
 export const engagements = [
@@ -92,7 +92,7 @@ export const legalPages = {
     sections: [
       {
         heading: "Who we are",
-        body: "AuraRush is a UK-based business that builds AI automation for growth. The contact address for privacy questions is admin@aurarush.org. The legal entity, company number and registered office will be added here before launch.",
+        body: "AuraRush is a UK-based digital growth agency. The contact address for privacy questions is admin@aurarush.org. The legal entity, company number and registered office will be added here before launch.",
       },
       {
         heading: "What the enquiry form collects",

@@ -1,6 +1,6 @@
 # AuraRush
 
-Marketing site for AuraRush: AI automation for growth. Built with Next.js (App Router), React, TypeScript and Tailwind CSS v4.
+Marketing site for AuraRush, a digital growth agency. Built with Next.js (App Router), React, TypeScript and Tailwind CSS v4.
 
 The site is organised around one idea: a business needs **attention**, then **conversion**, then **monetisation**, and attention comes from seven channels. Content for that model lives in `src/data/framework.ts`; services, case studies and insights are in `src/data/`.
 

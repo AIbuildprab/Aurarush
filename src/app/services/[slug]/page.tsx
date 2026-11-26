@@ -74,12 +74,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <h2 id="roles-title" className="h2 lg:col-span-4">Who does what</h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
             <div>
-              <h3 className="label">AI</h3>
-              <ul className="mt-3 grid gap-2">{service.aiRole.map((line) => <li key={line}>{line}</li>)}</ul>
+              <h3 className="label">We do</h3>
+              <ul className="mt-3 grid gap-2">{service.weDo.map((line) => <li key={line}>{line}</li>)}</ul>
             </div>
             <div>
-              <h3 className="label">People</h3>
-              <ul className="mt-3 grid gap-2">{service.humanRole.map((line) => <li key={line}>{line}</li>)}</ul>
+              <h3 className="label">You do</h3>
+              <ul className="mt-3 grid gap-2">{service.youDo.map((line) => <li key={line}>{line}</li>)}</ul>
             </div>
           </div>
         </div>

@@ -5,12 +5,12 @@ import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
 import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
 import { Reveal } from "@/components/ui/reveal";
-import { BrowserFrame, PhoneFrame } from "@/components/work/browser-frame";
+import { SiteTour } from "@/components/work/site-tour";
 import { CaseVideo } from "@/components/work/case-video";
 import { getStage } from "@/data/framework";
 import { getService } from "@/data/services";
 import { site } from "@/data/site";
-import { contextNote, getPublishedWork, getWork } from "@/data/work";
+import { contextNote, getPublishedWork, getTour, getWork } from "@/data/work";
 import { pageMetadata } from "@/lib/metadata";
 
 export function generateStaticParams() {
@@ -31,6 +31,8 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
 
   const all = getPublishedWork();
   const next = all[(all.findIndex((item) => item.slug === study.slug) + 1) % all.length];
+  const tour = getTour(study.slug);
+  const host = study.liveUrl.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
   const services = study.serviceSlugs.map((item) => getService(item)).filter((item) => item !== undefined);
 
   return (
@@ -49,18 +51,13 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
         </p>
       </PageHero>
 
-      <section className="section" aria-label="Screenshots">
-        <div className="container-wide grid items-end gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-9">
-            <div className="lift">
-              <BrowserFrame src={study.frames.desktop} alt={study.frames.alt} url={study.liveUrl} priority sizes="(min-width: 1024px) 900px, 100vw" />
-            </div>
+      {tour ? (
+        <section className="section" aria-label="Walkthrough of the live site">
+          <div className="container-wide">
+            <SiteTour client={study.client} host={host} desktop={tour.desktop} phone={tour.phone} />
           </div>
-          <div className="lg:col-span-3">
-            <PhoneFrame src={study.frames.mobile} alt={`${study.client} on a phone`} />
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="section border-y border-line bg-surface" aria-label="Problem, solution and result">
         <Reveal className="container-wide grid gap-10 lg:grid-cols-3">

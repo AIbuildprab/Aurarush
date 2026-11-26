@@ -25,7 +25,7 @@ const options = [
 ] as const;
 
 const recommendation: Record<StageId, ServiceSlug> = {
-  attention: "outbound-automation",
+  attention: "outbound-outreach",
   conversion: "websites-and-funnels",
   monetisation: "client-systems-and-dashboards",
 };

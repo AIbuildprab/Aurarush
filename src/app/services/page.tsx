@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Services",
-  description: "Seven AI automation services organised by the growth stage they improve, plus an audit and managed support.",
+  description: "Seven agency services organised by the growth stage they improve, plus an audit and managed support.",
   path: "/services",
 });
 

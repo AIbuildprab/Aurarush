@@ -234,6 +234,9 @@ a:hover > .card-arrow, a:hover .card-arrow { transform: translate(2px, -2px); }
 .hamburger.is-open span:nth-child(2) { opacity: 0; }
 .hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+.tour-scroll { scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; overscroll-behavior: contain; }
+.tour-scroll:focus-visible { outline-offset: -3px; }
+
 /* Motion ported from the first version of the site, re-tuned for the light theme. */
 .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .aurora-ribbon {

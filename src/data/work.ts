@@ -1,5 +1,6 @@
 import type { StageId } from "@/data/framework";
 import type { ServiceSlug } from "@/data/services";
+import tourSizes from "@/data/tour-sizes.json";
 
 export type CaseStudy = {
   slug: string;
@@ -130,4 +131,16 @@ export function getPublishedWork() {
 
 export function getWork(slug: string) {
   return getPublishedWork().find((study) => study.slug === slug);
+}
+
+type TourSizes = Record<string, { desktop: number[]; phone: number[] }>;
+
+/** Whole-page screenshots for the scrolling walkthrough, with their pixel sizes. */
+export function getTour(slug: string) {
+  const sizes = (tourSizes as TourSizes)[slug];
+  if (!sizes) return null;
+  return {
+    desktop: { src: `/work/${slug}/tour-desktop.webp`, width: sizes.desktop[0], height: sizes.desktop[1] },
+    phone: { src: `/work/${slug}/tour-phone.webp`, width: sizes.phone[0], height: sizes.phone[1] },
+  };
 }

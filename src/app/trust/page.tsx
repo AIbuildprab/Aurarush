@@ -5,23 +5,23 @@ import { commitments } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
-  title: "Trust and AI use",
-  description: "How AuraRush uses AI responsibly: human review, your approval, your data and written scope.",
+  title: "Our promises",
+  description: "What you can hold AuraRush to: a named owner, your approval, your accounts and a written scope.",
   path: "/trust",
 });
 
 const limits = [
   "No promised results.",
-  "No messages or posts in your name without your approval and a person's review.",
+  "No messages or posts in your name without your approval.",
   "No bought lists or bulk unsolicited email.",
   "No invented testimonials, logos or statistics.",
-  "No use of your data to train models, and no sharing it with other clients.",
+  "No sharing your data with other clients.",
 ];
 
 export default function TrustPage() {
   return (
     <>
-      <PageHero title="Trust and AI use." intro="Automation is only useful if you can trust what it does in your name." crumbs={[{ label: "Trust and AI use" }]} />
+      <PageHero title="Our promises." intro="What you can hold us to." crumbs={[{ label: "Our promises" }]} />
       <section className="section" aria-labelledby="commit-title">
         <div className="container-wide grid gap-10 lg:grid-cols-12">
           <h2 id="commit-title" className="h2 lg:col-span-4">We commit to</h2>

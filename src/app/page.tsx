@@ -41,15 +41,15 @@ export default function HomePage() {
         <Aurora />
         <div className="container-wide relative grid gap-12 py-14 lg:grid-cols-12 lg:py-20">
           <div className="lg:col-span-5">
-            <WordReveal as="h1" id="hero-title" text="AI automation for growth." className="h1" />
-            <p className="lead mt-6">We build the systems that win attention, convert it and turn it into revenue.</p>
+            <WordReveal as="h1" id="hero-title" text="The growth agency for local businesses." className="h1" />
+            <p className="lead mt-6">Websites, search, outreach and client systems, built to work together.</p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <BookCall />
               <Link href="/framework" className="btn btn-secondary">See the framework</Link>
             </div>
             <ul className="mt-10 grid gap-1 border-t border-line pt-5 text-[0.9375rem] text-muted">
               <li>Five live client builds</li>
-              <li>A person reviews every output</li>
+              <li>One named person owns every project</li>
               <li>Scope and cost in writing</li>
             </ul>
           </div>
@@ -81,6 +81,7 @@ export default function HomePage() {
           <SectionHeader
             id="services-title"
             title="Services"
+            intro="Start with one, or build the whole system. We tell you honestly what to do first."
             aside={<Link className="btn btn-text" href="/funnel-check">Not sure? Take the funnel check <ArrowRight className="arrow-x size-4" aria-hidden="true" /></Link>}
           />
           <Reveal className="mt-10 border-t border-line-strong">
