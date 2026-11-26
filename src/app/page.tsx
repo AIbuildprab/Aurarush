@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ServiceBento } from "@/components/home/service-bento";
@@ -17,6 +18,7 @@ import { BrowserFrame } from "@/components/work/browser-frame";
 import { channels, stages } from "@/data/framework";
 import { howWeWork, site } from "@/data/site";
 import { getPublishedWork } from "@/data/work";
+import logoSizes from "@/data/logo-sizes.json";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -79,9 +81,15 @@ export default function HomePage() {
             {[0, 1].map((copy) => (
               <ul key={copy} className="marquee-group" aria-hidden={copy === 1 ? "true" : undefined}>
                 {work.map((study) => (
-                  <li key={study.slug} className="mr-12 flex items-center gap-12 whitespace-nowrap font-display text-xl text-muted">
-                    {study.client}
-                    <span className="stage-dot" data-stage={study.stages[0]} aria-hidden="true" />
+                  <li key={study.slug} className="mr-14 flex items-center">
+                    <Image
+                      src={`/work/${study.slug}/logo.webp`}
+                      alt={copy === 0 ? study.client : ""}
+                      width={(logoSizes as Record<string, number[]>)[study.slug][0]}
+                      height={(logoSizes as Record<string, number[]>)[study.slug][1]}
+                      unoptimized
+                      className="h-11 w-auto rounded-md"
+                    />
                   </li>
                 ))}
               </ul>
