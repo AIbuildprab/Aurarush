@@ -19,7 +19,7 @@ export default function WorkPage() {
     <>
       <PageHero
         title="Work you can open and judge."
-        intro="Every project here is live, or clearly marked as in progress. Results are described in words, because we only show numbers the client has published themselves."
+        intro="Live projects, or marked in progress. Numbers shown are only those the client has published."
         crumbs={[{ label: "Work" }]}
       />
       <section className="section" aria-label="Case studies">
@@ -27,7 +27,7 @@ export default function WorkPage() {
           {work.map((study, index) => (
             <article key={study.slug} className="grid items-center gap-8 lg:grid-cols-12">
               <div className={index % 2 === 1 ? "lg:col-span-7 lg:col-start-6 lg:row-start-1" : "lg:col-span-7"}>
-                <Link href={`/work/${study.slug}`} aria-label={`${study.client} case study`}>
+                <Link href={`/work/${study.slug}`} aria-label={`${study.client} case study`} className="lift block">
                   <BrowserFrame src={study.frames.desktop} alt={study.frames.alt} url={study.liveUrl} priority={index === 0} />
                 </Link>
               </div>
@@ -53,7 +53,7 @@ export default function WorkPage() {
           ))}
         </div>
       </section>
-      <CtaBand title="Want a result like these?" text="Tell us about the business and where enquiries get lost. We will say plainly whether we can help." />
+      <CtaBand />
     </>
   );
 }

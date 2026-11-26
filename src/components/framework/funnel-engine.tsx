@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { channels, directionCopy, getChannel, getStage, stages, type Channel, type StageId } from "@/data/framework";
 import { getService } from "@/data/services";
@@ -40,21 +40,18 @@ function Detail({ selection }: { selection: Selection }) {
     const channel = getChannel(selection.id);
     if (!channel) return null;
     return (
-      <div data-stage="attention" className="grid gap-8 lg:grid-cols-12">
+      <div data-stage="attention" className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <p className="label">{directionCopy[channel.direction].name} channel</p>
-          <h3 className="h3 mt-2">{channel.name}</h3>
-          <p className="mt-3 text-muted">{channel.summary}</p>
-          <p className="mt-5 text-sm">
-            <span className="font-semibold">Primary skill: </span>
-            {channel.primarySkill}
+          <h3 className="h3">{channel.name}</h3>
+          <p className="mt-1 text-sm text-muted">
+            {directionCopy[channel.direction].name}
+            {channel.status === "advisory" ? " · Advisory" : ""}
           </p>
-          {channel.status === "advisory" ? (
-            <p className="mt-2 text-sm text-muted">We advise and support this channel. It is not one of our core builds.</p>
-          ) : null}
+          <p className="mt-3 text-muted">{channel.summary}</p>
+          <p className="mt-3 text-sm"><span className="font-semibold">Skill: </span>{channel.primarySkill}</p>
         </div>
         <div className="lg:col-span-4">
-          <p className="label">What AI automation adds</p>
+          <p className="label">AI adds</p>
           <ul className="mt-3 grid gap-2">
             {channel.aiRole.map((line) => (
               <li key={line} className="flex gap-3">
@@ -65,7 +62,7 @@ function Detail({ selection }: { selection: Selection }) {
           </ul>
         </div>
         <div className="lg:col-span-3">
-          <p className="label">Related services</p>
+          <p className="label">Service</p>
           <ul className="mt-3 grid gap-1">
             {channel.serviceSlugs.map((slug) => {
               const service = getService(slug);
@@ -76,9 +73,6 @@ function Detail({ selection }: { selection: Selection }) {
               ) : null;
             })}
           </ul>
-          <Link className="btn btn-text mt-2" href={`/framework#${channel.id}`}>
-            Read about this channel <ArrowRight className="arrow-x size-4" aria-hidden="true" />
-          </Link>
         </div>
       </div>
     );
@@ -87,24 +81,24 @@ function Detail({ selection }: { selection: Selection }) {
   const stage = getStage(selection.id);
   if (!stage) return null;
   return (
-    <div data-stage={stage.id} className="grid gap-8 lg:grid-cols-12">
+    <div data-stage={stage.id} className="grid gap-6 lg:grid-cols-12">
       <div className="lg:col-span-5">
-        <p className="label">Stage</p>
-        <h3 className="h3 mt-2 stage-text">{stage.name}</h3>
+        <h3 className="h3 stage-text">{stage.name}</h3>
         <p className="mt-3 font-display text-xl">{stage.question}</p>
-        <p className="mt-3 text-muted">{stage.summary}</p>
+        <p className="mt-2 text-muted">{stage.line}</p>
       </div>
-      <div className="lg:col-span-4">
-        <p className="label">What good looks like</p>
-        <p className="mt-3">{stage.good}</p>
-        <p className="label mt-6">What usually breaks</p>
-        <p className="mt-3 text-muted">{stage.breaks}</p>
-      </div>
-      <div className="lg:col-span-3">
-        <Link className="btn btn-text" href={`/framework#${stage.id}`}>
-          Read about this stage <ArrowRight className="arrow-x size-4" aria-hidden="true" />
-        </Link>
-      </div>
+      {stage.steps.length > 0 ? (
+        <ul className="grid gap-2 lg:col-span-7">
+          {stage.steps.map((step) => (
+            <li key={step.id} className="flex flex-wrap gap-x-3 border-b border-line pb-2">
+              <span className="font-medium">{step.name}</span>
+              <span className="text-muted">{step.text}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-muted lg:col-span-7">Seven channels, inbound and outbound. Select one to see what AI adds.</p>
+      )}
     </div>
   );
 }
@@ -158,8 +152,7 @@ export function FunnelEngine() {
               <span className="stage-dot" aria-hidden="true" />
               Attention
             </button>
-            <p className="mt-3 text-sm text-muted">Seven channels bring people in.</p>
-            <p className="label mt-5">Inbound: traffic comes to you</p>
+                        <p className="label mt-4">Inbound: traffic comes to you</p>
             <ul className="mt-2 grid gap-2">
               {inbound.map((channel) => (
                 <li key={channel.id}>
@@ -167,7 +160,7 @@ export function FunnelEngine() {
                 </li>
               ))}
             </ul>
-            <p className="label mt-5">Outbound: you go to them</p>
+            <p className="label mt-4">Outbound: you go to them</p>
             <ul className="mt-2 grid gap-2">
               {outbound.map((channel) => (
                 <li key={channel.id}>
@@ -209,36 +202,11 @@ export function FunnelEngine() {
         </div>
       </div>
       <figcaption className="sr-only">
-        A funnel with three stages. Attention has seven channels, five inbound and two outbound. Conversion captures, qualifies and responds. Monetisation closes, retains and expands, and measures.
+        Three stages. Attention has seven channels, five inbound and two outbound. Conversion captures, qualifies and responds. Monetisation closes, retains and measures.
       </figcaption>
       <div aria-live="polite" className="mt-8 rounded-[10px] border border-line bg-surface p-6 lg:p-8">
         <Detail selection={selection} />
       </div>
     </figure>
-  );
-}
-
-/** A static three-stage strip, with the relevant stages emphasised. Used on case studies. */
-export function StageStrip({ active }: { active: StageId[] }) {
-  return (
-    <ol className="grid gap-3 sm:grid-cols-3" aria-label="Funnel stages this work supports">
-      {stages.map((stage) => {
-        const on = active.includes(stage.id);
-        return (
-          <li
-            key={stage.id}
-            data-stage={stage.id}
-            className={cn("rounded-md border px-4 py-3", on ? "border-[var(--stage)] bg-[var(--stage-wash)]" : "border-line text-muted")}
-          >
-            <p className="flex items-center gap-2 font-semibold">
-              <span className="stage-dot" aria-hidden="true" />
-              {stage.name}
-              {on ? <span className="sr-only"> (supported by this work)</span> : null}
-            </p>
-            <p className="mt-1 text-sm">{stage.question}</p>
-          </li>
-        );
-      })}
-    </ol>
   );
 }

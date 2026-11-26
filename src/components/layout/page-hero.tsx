@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WordReveal } from "@/components/ui/word-reveal";
 
 export function PageHero({
   title,
@@ -27,7 +28,7 @@ export function PageHero({
         </nav>
         <div className="mt-8 grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <h1 id="page-title" className="h1">{title}</h1>
+            <WordReveal as="h1" id="page-title" text={title} className="h1" />
             {intro ? <p className="lead mt-6">{intro}</p> : null}
           </div>
         </div>

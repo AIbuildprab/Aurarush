@@ -4,8 +4,7 @@ export const site = {
   location: "United Kingdom",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aurarush.org",
   tagline: "AI automation for growth",
-  description:
-    "AuraRush builds AI automation for growth: systems that win attention, convert it into enquiries and turn those into revenue, with people reviewing the work.",
+  description: "AI automation for growth: systems that win attention, convert it and turn it into revenue, with people reviewing the work.",
   legal: {
     entity: "",
     companyNumber: "",
@@ -39,9 +38,9 @@ export const navigation = {
 } as const;
 
 export const stageOptions = [
-  { value: "attention", label: "Attention: not enough of the right people find us" },
-  { value: "conversion", label: "Conversion: people arrive but do not enquire" },
-  { value: "monetisation", label: "Monetisation: enquiries do not turn into repeat revenue" },
+  { value: "attention", label: "Attention: too few of the right people find us" },
+  { value: "conversion", label: "Conversion: people visit but do not enquire" },
+  { value: "monetisation", label: "Monetisation: enquiries do not become revenue" },
   { value: "not-sure", label: "I am not sure" },
 ] as const;
 
@@ -59,49 +58,29 @@ export const interests = [
 export const timelines = ["As soon as possible", "Within three months", "Later this year", "Just exploring"] as const;
 
 export const commitments = [
-  { title: "A person reviews the work", text: "AI drafts and sorts. A named person checks what is sent, published or built before it reaches your customers." },
-  { title: "You approve what speaks for you", text: "Messages, posts and pages go out only after you have agreed the approach and seen the output." },
-  { title: "Your data stays yours", text: "Accounts, lists and content remain in your name. We say where data is stored and who can see it." },
-  { title: "Scope and cost are written down", text: "You see what will be built and what it costs before any work starts." },
+  { title: "A person reviews the work", text: "AI drafts and sorts. A named person checks it first." },
+  { title: "You approve what speaks for you", text: "Nothing goes out in your name unapproved." },
+  { title: "Your data stays yours", text: "Accounts, lists and content stay in your name." },
+  { title: "Scope and cost in writing", text: "Agreed before any work starts." },
 ] as const;
 
 export const howWeWork = [
-  { title: "Discover", text: "We learn how people find you today, what happens when they arrive, and where enquiries get lost." },
-  { title: "Design the system", text: "You receive a written scope: what will be built, what AI does, what a person does, and what it costs." },
-  { title: "Build and test", text: "We build in small pieces, run a pilot with every output reviewed, and show you the result before it goes live." },
-  { title: "Run and improve", text: "The system is looked after and adjusted on a regular rhythm, using what the results show." },
+  { title: "Discover", text: "How people find you, and where enquiries get lost." },
+  { title: "Design", text: "A written scope: what is built, who does what, the cost." },
+  { title: "Build", text: "A pilot with every output reviewed." },
+  { title: "Run", text: "Looked after and improved on a regular rhythm." },
 ] as const;
 
 export const engagements = [
-  {
-    id: "audit",
-    name: "Growth audit",
-    audience: "For a clear decision",
-    summary: "A review of attention, conversion and monetisation, ending in a written roadmap.",
-    included: ["A look at how you win and keep customers today", "A channel recommendation", "A Now, Next, Later roadmap", "A follow-up conversation"],
-  },
-  {
-    id: "build",
-    name: "Focused build",
-    audience: "For a defined need",
-    summary: "One system, such as an outreach workflow, a website or a dashboard, with a clear scope and finish.",
-    included: ["A written scope before work starts", "Design, build and testing", "A pilot with human review", "Handover notes in plain English"],
-  },
-  {
-    id: "support",
-    name: "Build and managed support",
-    audience: "For a system you want looked after",
-    summary: "A build followed by hosting, monitoring and improvements on a regular rhythm.",
-    included: ["The initial build", "Hosting, updates and security care", "A route for improvements", "A named contact"],
-  },
+  { name: "Growth audit", text: "A review and a written roadmap." },
+  { name: "Focused build", text: "One system, with a clear scope and finish." },
+  { name: "Build and managed support", text: "A build, then hosting and improvements." },
 ] as const;
 
 export const howWeWorkFaqs = [
-  { question: "Do I have to take ongoing support?", answer: "No. A focused build is complete in itself. Managed support is there when you want the system looked after." },
-  { question: "When do I see a price?", answer: "After a short conversation about scope. We do not publish day rates, and we do not start until the cost is agreed in writing." },
-  { question: "Can you work with what I already have?", answer: "Often, yes. We will say plainly if a rebuild is the more sensible route." },
-  { question: "Who will I deal with?", answer: `You deal with the people doing the work. AuraRush is UK-based, and the contact address is admin@aurarush.org.` },
-  { question: "What happens to my enquiry details?", answer: "We use them only to reply. The privacy notice explains what we keep and why. It is a draft until a qualified person reviews it." },
+  { question: "Do I have to take ongoing support?", answer: "No. A focused build is complete in itself." },
+  { question: "When do I see a price?", answer: "After a short conversation about scope, and before any work starts. We do not publish day rates." },
+  { question: "Who will I deal with?", answer: "The people doing the work. We are UK-based: admin@aurarush.org." },
 ] as const;
 
 export const team: readonly { name: string; role: string; bio: string }[] = [];

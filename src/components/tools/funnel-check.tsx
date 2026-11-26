@@ -49,15 +49,12 @@ export function FunnelCheck() {
     const tied = scores.filter((s) => s.score / s.max === weakest.score / weakest.max).length > 1;
     return (
       <div data-stage={weakest.stage.id} className="rounded-[10px] border border-line bg-surface p-8" role="status">
-        <p className="label">Your result</p>
         <h2 className="h2 mt-2">
           {tied ? "Several stages need attention. Start with " : "Start with "}
           <span className="stage-text">{weakest.stage.name.toLowerCase()}</span>.
         </h2>
-        <p className="lead mt-4">{weakest.stage.summary}</p>
-        <p className="mt-4 text-sm text-muted">
-          This is a quick self-assessment based on your own answers. It is a conversation starter, not a diagnosis or a forecast.
-        </p>
+        <p className="lead mt-4">{weakest.stage.line}</p>
+        <p className="mt-4 text-sm text-muted">A quick self-assessment from your own answers, not a diagnosis or forecast.</p>
         <dl className="mt-6 grid gap-2 sm:grid-cols-3">
           {scores.map(({ stage, score, max }) => (
             <div key={stage.id} data-stage={stage.id} className="rounded-md border border-line bg-paper p-3">

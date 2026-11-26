@@ -24,7 +24,7 @@ export function Footer() {
         <div className="lg:col-span-4">
           <Logo />
           <p className="mt-6 max-w-[40ch] text-muted">
-            AI automation for growth. We build the systems that win attention, convert it into enquiries and turn those into revenue, with people reviewing the work.
+            AI automation for growth, with people reviewing the work.
           </p>
           <p className="mt-6">
             <a className="link" href={`mailto:${site.email}`}>{site.email}</a>
