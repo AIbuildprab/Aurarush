@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { BookCall } from "@/components/layout/book-call";
 import { PageHero } from "@/components/layout/page-hero";
 import { BookingEmbed } from "@/components/contact/booking-embed";
@@ -7,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Contact",
-  description: "Tell AuraRush about your business and where enquiries are getting lost. Email admin@aurarush.org.",
+  description: "Tell AuraRush about your business and which stage of growth is costing you most. Email admin@aurarush.org.",
   path: "/contact",
 });
 
@@ -15,22 +16,23 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="Tell us where enquiries get lost."
-        intro="A short note is enough. We’ll reply from admin@aurarush.org and suggest what a better funnel, dashboard or plan could look like."
+        title="Tell us where growth is leaking."
+        intro="A short note is enough. We reply from admin@aurarush.org, usually within one working day, with where we would look first."
         crumbs={[{ label: "Contact" }]}
       />
       <section className="section" aria-labelledby="enquiry-title">
-        <div className="container-site grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <h2 id="enquiry-title" className="h2">Write to us.</h2>
-            <p className="mt-6"><a className="underline" href={`mailto:${site.email}`}>{site.email}</a></p>
-            <p className="mt-2 text-muted">Based in the United Kingdom</p>
-            <BookCall className="mt-8" />
+        <div className="container-wide grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <h2 id="enquiry-title" className="h3">Prefer to talk?</h2>
+            <p className="mt-4"><a className="link" href={`mailto:${site.email}`}>{site.email}</a></p>
+            <p className="mt-1 text-muted">Based in the {site.location}</p>
+            <BookCall className="mt-6" variant="secondary" />
             <BookingEmbed />
           </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <EnquiryForm />
+          <div className="lg:col-span-7 lg:col-start-6">
+            <Suspense fallback={<p className="text-muted">Loading the form…</p>}>
+              <EnquiryForm />
+            </Suspense>
           </div>
         </div>
       </section>

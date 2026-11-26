@@ -2,28 +2,24 @@ import type { MetadataRoute } from "next";
 import { insights } from "@/data/insights";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
-import { workItems } from "@/data/work";
+import { getPublishedWork } from "@/data/work";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [
-    "/",
-    "/services",
-    "/how-we-work",
-    "/work",
-    "/about",
-    "/insights",
-    "/contact",
-    "/privacy",
-    "/cookies",
-    "/terms",
-    ...services.map((service) => `/services/${service.slug}`),
-    ...workItems.map((item) => `/work/${item.slug}`),
-    ...insights.map((article) => `/insights/${article.slug}`),
-  ];
+  const fixed = ["/", "/framework", "/services", "/work", "/insights", "/how-we-work", "/about", "/trust", "/funnel-check", "/contact", "/privacy", "/cookies", "/terms"];
 
-  return paths.map((path) => ({
-    url: `${site.url}${path === "/" ? "" : path}`,
-    changeFrequency: "monthly",
-    priority: path === "/" ? 1 : 0.7,
-  }));
+  return [
+    ...fixed.map((path) => ({
+      url: `${site.url}${path === "/" ? "" : path}`,
+      changeFrequency: "monthly" as const,
+      priority: path === "/" ? 1 : 0.7,
+    })),
+    ...services.map((service) => ({ url: `${site.url}/services/${service.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+    ...getPublishedWork().map((study) => ({ url: `${site.url}/work/${study.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
+    ...insights.map((article) => ({
+      url: `${site.url}/insights/${article.slug}`,
+      lastModified: new Date(article.dateIso),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    })),
+  ];
 }

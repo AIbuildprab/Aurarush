@@ -1,3 +1,5 @@
+import type { StageId } from "@/data/framework";
+
 export type InsightBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
@@ -7,7 +9,7 @@ export type InsightBlock =
 export type Insight = {
   slug: string;
   title: string;
-  category: string;
+  stage: StageId;
   date: string;
   dateIso: string;
   readTime: string;
@@ -17,11 +19,47 @@ export type Insight = {
 
 export const insights: Insight[] = [
   {
-    slug: "what-makes-a-website-enquiry-form-convert",
-    title: "What makes a website enquiry form convert",
-    category: "Funnels",
-    date: "12 October 2026",
-    dateIso: "2026-10-12",
+    slug: "start-with-the-weakest-stage",
+    title: "Start with the weakest stage of your funnel",
+    stage: "attention",
+    date: "12 November 2026",
+    dateIso: "2026-11-12",
+    readTime: "5 min read",
+    excerpt: "Growth has three jobs: win attention, convert it, and monetise it. Fix the one that is costing most before you add anything else.",
+    blocks: [
+      { type: "p", text: "Most businesses try to fix growth by doing more of whatever is most visible. More posts, more ads, a new website. It feels productive, and it often fixes the wrong thing." },
+      { type: "h2", text: "Three jobs, one order" },
+      { type: "p", text: "Every business needs people to find it, to act once they arrive, and to pay and come back. We call these attention, conversion and monetisation. They depend on each other. More attention into a weak conversion path only produces more lost enquiries." },
+      { type: "quote", text: "More traffic into a leaking funnel is a more expensive leak." },
+      { type: "h2", text: "How to find the weak stage" },
+      { type: "p", text: "Ask three plain questions. Do the right people know you exist? When they arrive, do they take a clear next step? When they enquire, do you reply quickly and follow up until the answer is yes or no?" },
+      { type: "p", text: "The first question you answer no to is usually where to start. Automation is most useful once you know which stage it is helping." },
+    ],
+  },
+  {
+    slug: "seven-ways-to-get-attention",
+    title: "Seven ways to win attention, and which suit a small business",
+    stage: "attention",
+    date: "26 October 2026",
+    dateIso: "2026-10-26",
+    readTime: "6 min read",
+    excerpt: "Organic content, search, product-led, paid, borrowed audiences, outbound and offline. Most businesses should pick one or two.",
+    blocks: [
+      { type: "p", text: "There are only a handful of ways to get in front of customers. Anything else is a repackaging of these seven." },
+      { type: "h2", text: "Inbound and outbound" },
+      { type: "p", text: "Inbound channels bring traffic to the business: organic content, search, product-led growth, paid advertising and borrowed audiences. Outbound channels send the business to the traffic: outreach and offline networking." },
+      { type: "p", text: "Paid advertising sits in a grey area, because you are paying to reach people who did not ask to hear from you." },
+      { type: "h3", text: "Choose by how you sell" },
+      { type: "p", text: "A business that sells to other businesses can often start with outbound, because you can name who you want to reach. A business that depends on local trust usually benefits from search and reviews first." },
+      { type: "quote", text: "Pick one channel, run it consistently, and add another only when the first is working." },
+    ],
+  },
+  {
+    slug: "what-makes-an-enquiry-form-convert",
+    title: "What makes an enquiry form convert",
+    stage: "conversion",
+    date: "9 October 2026",
+    dateIso: "2026-10-09",
     readTime: "5 min read",
     excerpt: "A form converts when it asks for the next useful fact, and no more, at the moment someone is ready to talk.",
     blocks: [
@@ -30,51 +68,8 @@ export const insights: Insight[] = [
       { type: "p", text: "Decide what a good enquiry looks like before you add fields. If you only need a name, a way to reply, and the service they want, stop there." },
       { type: "p", text: "Extra questions earn a place when the answer changes your reply. A budget band can do that. A postal address usually does not." },
       { type: "quote", text: "The form should feel like the start of a conversation, not an application." },
-      { type: "h2", text: "Order matters on a phone" },
-      { type: "p", text: "Put the easiest answer first. A short first step is more likely to be finished than a long form that starts with “tell us about your project”." },
       { type: "h3", text: "Say what happens next" },
       { type: "p", text: "Tell people when you will reply and where the message goes. A vague “we’ll be in touch” is weaker than “we reply within one working day”." },
-      { type: "p", text: "Then test it yourself on a phone. If you hesitate, a customer will leave." },
-    ],
-  },
-  {
-    slug: "why-personal-trainers-need-more-than-a-booking-link",
-    title: "Why personal trainers need more than a booking link",
-    category: "Dashboards",
-    date: "28 September 2026",
-    dateIso: "2026-09-28",
-    readTime: "6 min read",
-    excerpt: "A booking link is useful once someone is ready. It does not replace a way to catch, qualify and follow up the people who are not there yet.",
-    blocks: [
-      { type: "p", text: "A booking link assumes the person already knows they want a session with you. Many visitors are earlier than that. They want to know if you train people like them." },
-      { type: "h2", text: "The gap before the diary" },
-      { type: "p", text: "That gap is where enquiries get lost. A message on Instagram, a note in email, and a half-finished form are three lists. None of them is the working day." },
-      { type: "quote", text: "The diary shows who is booked. It does not show who is still waiting for an answer." },
-      { type: "h3", text: "What a small dashboard is for" },
-      { type: "p", text: "A simple dashboard is a list of new enquiries from the same funnel as the website. You can see who to reply to without opening four apps." },
-      { type: "p", text: "It does not need to replace your session notes or your payment tool on day one. It needs to stop leads going quiet." },
-      { type: "h2", text: "Start with the reply" },
-      { type: "p", text: "Write down the three questions you ask before you offer a place. Put those on the form. Let the answers land in one list. That is enough to judge whether a dashboard is worth building." },
-    ],
-  },
-  {
-    slug: "it-consulting-for-small-businesses-where-to-start",
-    title: "IT consulting for small businesses: where to start",
-    category: "IT consulting",
-    date: "9 September 2026",
-    dateIso: "2026-09-09",
-    readTime: "5 min read",
-    excerpt: "Start with the decision you are stuck on, not with a tour of every tool on the market.",
-    blocks: [
-      { type: "p", text: "Small businesses rarely need a strategy document. They need to know what to fix first, what can wait, and what to leave alone." },
-      { type: "h2", text: "Name the decision" },
-      { type: "p", text: "“Should we rebuild the website?” is a decision. “We should modernise our stack” is not. The first one can be answered. The second one grows meetings." },
-      { type: "p", text: "Write the decision in a sentence, then list the tools that touch it. That is the audit. It is shorter than people expect." },
-      { type: "quote", text: "A useful roadmap fits on one page and can be read aloud." },
-      { type: "h2", text: "Now, next, later" },
-      { type: "h3", text: "Now is what is costing enquiries or time this month" },
-      { type: "p", text: "Next is what you will do once that is steady. Later is the idea that can wait without harm. If everything is now, the list is not finished." },
-      { type: "p", text: "Ask whoever advises you to explain the recommendation without product names first. If the reason is clear, the tool choice can follow." },
     ],
   },
 ];

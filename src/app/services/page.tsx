@@ -1,59 +1,57 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
-import { engagementSteps } from "@/data/site";
-import { serviceHues, services } from "@/data/services";
+import { stages } from "@/data/framework";
+import { services } from "@/data/services";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "Services",
-  description: "Funnel websites, lead forms, dashboards for personal trainers and salons, plus IT consulting and support.",
+  description: "Seven AI automation services organised by the growth stage they improve: attention, conversion and monetisation, plus an audit and managed support.",
   path: "/services",
 });
 
 export default function ServicesPage() {
+  const groups = [...stages.map((stage) => ({ key: stage.id, name: stage.name, question: stage.question })), { key: "cross-stage", name: "Across every stage", question: "Where to start, and keeping it running." }];
+
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Six ways we build value."
-        intro="Websites, forms, dashboards and IT advice, designed so the way customers arrive and the way you manage them belong together."
+        title="Services, organised by the stage they improve."
+        intro="Each service builds or supports one part of the growth system. If you are unsure where to begin, start with the growth audit."
         crumbs={[{ label: "Services" }]}
       />
-      <section className="section" aria-labelledby="service-list">
-        <div className="container-site grid gap-16">
-          <h2 id="service-list" className="sr-only">Service list</h2>
-          {services.map((service, index) => (
-            <article key={service.slug} className="grid items-center gap-8 border-t border-white/10 pt-10 lg:grid-cols-12">
-              <p className="font-display text-6xl font-light lg:col-span-2" style={{ color: serviceHues[service.hue].text }}>{service.number}</p>
-              <div className={index % 2 ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-8"}>
-                <h3 className="h3">{service.name}</h3>
-                <p className="mt-3 max-w-[58ch] text-muted">{service.summary}</p>
-                <p className="mt-4"><span className="font-mono text-xs tracking-[0.08em] text-muted uppercase">Outcome — </span>{service.outcome}</p>
-                <p className="mt-3 font-mono text-xs tracking-[0.06em] text-muted uppercase">{service.tags.join(" / ")}</p>
-                <Link className="btn btn-text mt-6" href={`/services/${service.slug}`}>
-                  Explore the service
-                  <ArrowRight className="arrow-x size-4" aria-hidden="true" />
-                </Link>
+      <section className="section" aria-label="All services">
+        <div className="container-wide border-t border-line-strong">
+          {groups.map((group) => (
+            <div key={group.key} data-stage={group.key} className="grid gap-4 border-b border-line py-10 lg:grid-cols-12">
+              <div className="lg:col-span-3">
+                <p className="flex items-center gap-2 font-semibold"><span className="stage-dot" aria-hidden="true" />{group.name}</p>
+                <p className="mt-1 text-muted">{group.question}</p>
               </div>
-            </article>
+              <ul className="grid gap-1 lg:col-span-9">
+                {services.filter((service) => service.stage === group.key).map((service) => (
+                  <li key={service.slug}>
+                    <Link href={`/services/${service.slug}`} className="row-link -mx-3 flex items-start justify-between gap-6 rounded-md px-3 py-3">
+                      <span>
+                        <span className="font-display text-2xl">
+                          {service.name}
+                          {service.startHere ? <span className="ml-3 rounded-full bg-ink px-2.5 py-0.5 align-middle font-sans text-xs font-semibold text-paper">Start here</span> : null}
+                        </span>
+                        <span className="mt-1 block max-w-[62ch] text-muted">{service.summary}</span>
+                        {service.availability === "on-request" ? <span className="mt-1 block text-sm text-muted">Scoped per project</span> : null}
+                      </span>
+                      <ArrowUpRight className="card-arrow mt-2 size-5 shrink-0 text-muted" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </section>
-      <section className="section border-t border-white/10" aria-labelledby="engagement-title">
-        <div className="container-site">
-          <h2 id="engagement-title" className="h2">How an engagement works</h2>
-          <ol className="mt-10 grid gap-6 md:grid-cols-4">
-            {engagementSteps.map((step) => (
-              <li key={step.number} className="border-t border-white/10 pt-4">
-                <p className="font-mono text-sm text-muted">{step.number}</p>
-                <h3 className="mt-3 text-xl">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted">{step.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <CtaBand />
     </>
   );
 }

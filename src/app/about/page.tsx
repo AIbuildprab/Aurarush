@@ -1,11 +1,12 @@
+import Link from "next/link";
+import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
-import { PhilosophyList } from "@/components/sections/philosophy-list";
-import { site, team } from "@/data/site";
+import { commitments, site, team } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   title: "About",
-  description: "AuraRush is a UK IT services and consulting business. We build websites, funnels and dashboards that turn visits into enquiries.",
+  description: "AuraRush is a UK-based business that builds AI automation for growth, with a person reviewing every piece of work.",
   path: "/about",
 });
 
@@ -13,44 +14,66 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About"
-        title="We build value into the way a business gets customers."
-        intro="AuraRush is UK-based. We design the path from a visit to an enquiry, then the system that lets you manage what comes in."
+        title="We build growth systems, and we stay accountable for them."
+        intro="AuraRush helps businesses win attention, convert it and turn it into revenue, using AI automation where it earns its place and people where judgement matters."
         crumbs={[{ label: "About" }]}
       />
+
       <section className="section" aria-labelledby="story-title">
-        <div className="container-site grid gap-8 lg:grid-cols-2">
-          <h2 id="story-title" className="h2">The story is the system.</h2>
-          <div className="grid gap-4 text-muted">
-            <p>A website that looks finished but does not ask for the next step is a cost. A form that nobody finishes is a cost. A dashboard nobody opens is a cost.</p>
-            <p>AuraRush starts with the enquiry. The site, the form and the dashboard are one path, with IT advice and support behind them.</p>
-            <p>We are based in the {site.location}. The address for a conversation is {site.email}.</p>
+        <div className="container-wide grid gap-10 lg:grid-cols-12">
+          <h2 id="story-title" className="h2 lg:col-span-4">Why we exist</h2>
+          <div className="prose-body lg:col-span-7">
+            <p>Every business plays the same game. It needs attention from the right people, a way to convert that attention, and a way to turn conversions into revenue. How well it does each of those decides how fast it grows.</p>
+            <p>AI automation can build or support all three. It is a skill, not a single service. The craft behind each channel is different, and automation lets one small team do the repetitive part of each, consistently, without losing the human judgement that makes the work good.</p>
+            <p>We started by building websites and client systems for small businesses, and those live projects are on the <Link className="link" href="/work">work page</Link>. We now apply the same discipline to outreach, content, search and paid media.</p>
           </div>
         </div>
       </section>
-      <section className="section border-t border-white/10" aria-labelledby="values-title">
-        <div className="container-site grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <h2 id="values-title" className="h2">What we hold to.</h2>
-          </div>
-          <PhilosophyList />
-        </div>
-      </section>
-      <section className="section" aria-labelledby="team-title">
-        <div className="container-site">
-          <h2 id="team-title" className="h2">Team</h2>
-          <p className="lead mt-4">Names and portraits will be added when they are confirmed. These places are held open.</p>
-          <ul className="mt-10 grid gap-6 md:grid-cols-3">
-            {team.map((person, index) => (
-              <li key={`${person.role}-${index}`} className="border-t border-white/10 pt-4">
-                <div className="flex aspect-square items-end rounded-lg border border-white/10 bg-surface p-4 text-sm text-muted" aria-hidden="true">Portrait to be added</div>
-                <h3 className="mt-4 text-xl">{person.name}</h3>
-                <p className="text-muted">{person.role}</p>
+
+      <section className="section border-y border-line bg-surface" aria-labelledby="hold-title">
+        <div className="container-wide grid gap-10 lg:grid-cols-12">
+          <h2 id="hold-title" className="h2 lg:col-span-4">What we hold to</h2>
+          <ul className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
+            {commitments.map((item) => (
+              <li key={item.title}>
+                <p className="font-semibold">{item.title}</p>
+                <p className="mt-1 text-muted">{item.text}</p>
               </li>
             ))}
           </ul>
         </div>
       </section>
+
+      {team.length > 0 ? (
+        <section className="section" aria-labelledby="team-title">
+          <div className="container-wide">
+            <h2 id="team-title" className="h2">Team</h2>
+            <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {team.map((person) => (
+                <li key={person.name}>
+                  <p className="font-display text-2xl">{person.name}</p>
+                  <p className="text-muted">{person.role}</p>
+                  <p className="mt-3">{person.bio}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="section" aria-labelledby="facts-title">
+        <div className="container-wide grid gap-10 lg:grid-cols-12">
+          <h2 id="facts-title" className="h2 lg:col-span-4">Company details</h2>
+          <dl className="grid gap-4 lg:col-span-7">
+            <div className="grid gap-1 border-b border-line pb-3 sm:grid-cols-[180px_1fr]"><dt className="text-muted">Based in</dt><dd>The {site.location}</dd></div>
+            <div className="grid gap-1 border-b border-line pb-3 sm:grid-cols-[180px_1fr]"><dt className="text-muted">Contact</dt><dd><a className="link" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+            {site.legal.entity ? <div className="grid gap-1 border-b border-line pb-3 sm:grid-cols-[180px_1fr]"><dt className="text-muted">Legal entity</dt><dd>{site.legal.entity}</dd></div> : null}
+            {site.legal.companyNumber ? <div className="grid gap-1 border-b border-line pb-3 sm:grid-cols-[180px_1fr]"><dt className="text-muted">Company number</dt><dd>{site.legal.companyNumber}</dd></div> : null}
+          </dl>
+        </div>
+      </section>
+
+      <CtaBand />
     </>
   );
 }

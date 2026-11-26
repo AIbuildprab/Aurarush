@@ -1,29 +1,21 @@
-import { WordReveal } from "@/components/ui/word-reveal";
-
 export function SectionHeader({
-  eyebrow,
-  title,
-  highlight,
-  intro,
   id,
+  title,
+  intro,
   aside,
+  as: Tag = "h2",
 }: {
-  eyebrow: string;
-  title: string;
-  highlight?: string;
-  intro?: string;
   id: string;
+  title: string;
+  intro?: string;
   aside?: React.ReactNode;
+  as?: "h1" | "h2";
 }) {
   return (
-    <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <p className="eyebrow">
-          <span className="eyebrow-dot" aria-hidden="true" />
-          {eyebrow}
-        </p>
-        <WordReveal id={id} text={title} highlight={highlight} className="h2 mt-5 max-w-[min(16ch,100%)]" />
-        {intro ? <p className="lead mt-6">{intro}</p> : null}
+    <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div className="max-w-3xl">
+        <Tag id={id} className="h2">{title}</Tag>
+        {intro ? <p className="lead mt-5">{intro}</p> : null}
       </div>
       {aside}
     </div>

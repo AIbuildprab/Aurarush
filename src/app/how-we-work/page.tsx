@@ -1,13 +1,12 @@
-import { BookCall } from "@/components/layout/book-call";
+import { CtaBand } from "@/components/layout/cta-band";
 import { PageHero } from "@/components/layout/page-hero";
 import { FaqList } from "@/components/ui/faq-list";
-import { comparison, engagements, howWeWorkFaqs } from "@/data/site";
+import { commitments, engagements, howWeWork, howWeWorkFaqs } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
-import { cn } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "How we work",
-  description: "Focused builds, ongoing support, or a consulting engagement. Scope and cost are agreed before work starts.",
+  description: "A clear scope, a pilot with human review, and a cost agreed in writing before work starts. How AuraRush engagements run.",
   path: "/how-we-work",
 });
 
@@ -15,67 +14,71 @@ export default function HowWeWorkPage() {
   return (
     <>
       <PageHero
-        eyebrow="How we work"
         title="A clear scope, then the work."
-        intro="Choose a focused build, a build with ongoing support, or a consulting engagement. You deal with the people doing the work."
+        intro="Every engagement starts with a written scope and ends with something you can run without us. Here is how that happens."
         crumbs={[{ label: "How we work" }]}
       />
-      <section className="section" aria-labelledby="options-title">
-        <div className="container-site">
-          <h2 id="options-title" className="h2">Three ways to start</h2>
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {engagements.map((option) => (
-              <article key={option.id} className={cn("flex flex-col rounded-lg border border-white/15 p-8", option.highlighted && "bg-surface-2 shadow-[0_0_40px_rgba(222,47,75,0.15)]")}>
-                <p className="font-mono text-xs tracking-[0.12em] text-muted uppercase">{option.audience}</p>
-                <h3 className="h3 mt-4">{option.name}</h3>
-                <p className="mt-3 text-muted">{option.summary}</p>
-                <ul className="mt-6 grid gap-3">
-                  {option.included.map((item) => (
-                    <li key={item} className="border-t border-white/10 pt-3 text-sm">{item}</li>
+
+      <section className="section" aria-labelledby="steps-title">
+        <div className="container-wide">
+          <h2 id="steps-title" className="h2">Four steps</h2>
+          <ol className="mt-10 grid gap-8 border-t border-line-strong pt-8 md:grid-cols-2 lg:grid-cols-4">
+            {howWeWork.map((step, index) => (
+              <li key={step.title}>
+                <p className="font-display text-3xl text-muted" aria-hidden="true">{index + 1}</p>
+                <h3 className="mt-2 text-xl font-semibold">{step.title}</h3>
+                <p className="mt-2 text-muted">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section border-y border-line bg-surface" aria-labelledby="engagements-title">
+        <div className="container-wide">
+          <h2 id="engagements-title" className="h2">Three ways to work together</h2>
+          <ul className="mt-10 border-t border-line-strong">
+            {engagements.map((engagement) => (
+              <li key={engagement.id} className="grid gap-6 border-b border-line py-8 lg:grid-cols-12">
+                <div className="lg:col-span-4">
+                  <p className="label">{engagement.audience}</p>
+                  <h3 className="h3 mt-2">{engagement.name}</h3>
+                  <p className="mt-3 text-muted">{engagement.summary}</p>
+                </div>
+                <ul className="grid gap-2 lg:col-span-6 lg:col-start-7">
+                  {engagement.included.map((item) => (
+                    <li key={item} className="flex gap-3"><span className="stage-dot mt-2.5" aria-hidden="true" />{item}</li>
                   ))}
                 </ul>
-                <p className="mt-6 font-mono text-sm">{option.priceLabel}</p>
-                <BookCall className="mt-6" />
-              </article>
+              </li>
             ))}
-          </div>
+          </ul>
+          <p className="mt-6 text-muted">All three are quoted after a short conversation. We do not publish day rates.</p>
         </div>
       </section>
-      <section className="section border-t border-white/10" aria-labelledby="compare-title">
-        <div className="container-site">
-          <h2 id="compare-title" className="h2">Compare the options</h2>
-          <div className="mt-8 overflow-x-auto">
-            <table className="w-full min-w-[720px] text-left">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="py-3 pr-4 font-mono text-xs tracking-[0.12em] text-muted uppercase"> </th>
-                  {comparison.columns.map((column) => (
-                    <th key={column} className="px-4 py-3 font-normal">{column}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {comparison.rows.map((row) => (
-                  <tr key={row.label} className="border-b border-white/10">
-                    <th className="py-4 pr-4 font-mono text-xs tracking-[0.08em] text-muted uppercase">{row.label}</th>
-                    {row.values.map((value, index) => (
-                      <td key={`${row.label}-${index}`} className="px-4 py-4 text-sm">{value}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+
+      <section className="section" aria-labelledby="commit-title">
+        <div className="container-wide grid gap-10 lg:grid-cols-12">
+          <h2 id="commit-title" className="h2 lg:col-span-4">What we commit to</h2>
+          <ul className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
+            {commitments.map((item) => (
+              <li key={item.title}>
+                <p className="font-semibold">{item.title}</p>
+                <p className="mt-1 text-muted">{item.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
-      <section className="section" aria-labelledby="how-faq">
-        <div className="container-site max-w-3xl">
-          <h2 id="how-faq" className="h2">Questions</h2>
-          <div className="mt-8">
-            <FaqList items={howWeWorkFaqs} />
-          </div>
+
+      <section className="section border-t border-line" aria-labelledby="faq-title">
+        <div className="container-wide grid gap-10 lg:grid-cols-12">
+          <h2 id="faq-title" className="h2 lg:col-span-4">Questions</h2>
+          <div className="lg:col-span-8"><FaqList items={howWeWorkFaqs} /></div>
         </div>
       </section>
+
+      <CtaBand />
     </>
   );
 }

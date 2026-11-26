@@ -1,29 +1,51 @@
 import { z } from "zod";
-import { businessTypes, needs } from "@/data/site";
+import { interests, timelines } from "@/data/site";
+
+export const stageValues = ["attention", "conversion", "monetisation", "not-sure"] as const;
+export const channelValues = [
+  "organic-content",
+  "search",
+  "product-led",
+  "paid-advertising",
+  "borrowed-audiences",
+  "outbound",
+  "offline",
+] as const;
+
+const optionalText = z.string().trim().max(200).optional().or(z.literal(""));
 
 export const enquirySchema = z.object({
-  fullName: z.string().trim().min(2, "Enter your full name."),
-  email: z.string().trim().email("Enter a valid email address."),
-  phone: z.string().trim().optional().or(z.literal("")),
-  businessName: z.string().trim().min(2, "Enter your business name."),
-  businessType: z.enum(businessTypes, {
-    errorMap: () => ({ message: "Choose the option that fits you best." }),
-  }),
+  fullName: z.string().trim().min(2, "Enter your full name.").max(120),
+  email: z.string().trim().email("Enter a valid email address.").max(200),
+  company: z.string().trim().min(2, "Enter your company name.").max(160),
+  role: optionalText,
   website: z
     .string()
     .trim()
+    .max(200)
     .refine(
       (value) => value === "" || /^(https?:\/\/)?[^\s]+\.[^\s]+$/.test(value),
       "Enter a valid website, or leave this blank.",
     ),
-  need: z.enum(needs, {
-    errorMap: () => ({ message: "Choose what you need help with." }),
-  }),
-  message: z.string().trim().min(12, "Tell us a little more, in a sentence or two."),
+  weakestStage: z.enum(stageValues, { errorMap: () => ({ message: "Choose the stage that feels weakest." }) }),
+  channels: z.array(z.enum(channelValues)).max(7),
+  interest: z.enum(interests, { errorMap: () => ({ message: "Choose what you are interested in." }) }),
+  timeline: z.enum(timelines).optional().or(z.literal("")),
+  message: z.string().trim().min(12, "Tell us a little more, in a sentence or two.").max(3000),
   consent: z.boolean().refine((value) => value, {
     message: "Please agree so AuraRush can reply to your enquiry.",
   }),
+  source: z.string().trim().max(60).optional().or(z.literal("")),
+  /** Honeypot. Real visitors never see or fill this. */
   companyWebsite: z.string().optional().or(z.literal("")),
+  /** When the form was opened (ms since epoch). Used to reject instant bot submissions. */
+  openedAt: z.number().optional(),
 });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;
+
+export const enquirySteps = [
+  { title: "About you", fields: ["fullName", "email", "company", "role", "website"] },
+  { title: "What you need", fields: ["weakestStage", "channels", "interest", "timeline"] },
+  { title: "Your message", fields: ["message", "consent"] },
+] as const satisfies readonly { title: string; fields: readonly (keyof EnquiryInput)[] }[];
